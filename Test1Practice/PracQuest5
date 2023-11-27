@@ -1,0 +1,16 @@
+Program Ans5 takes one or more command line arguments, assumed 
+to be a positive integers. For each argument, it prints on stdout 
+whether or not it is a prime number. Output must be exactly like the 
+example.
+Ans5 must use the factor command to help determine if the argument is
+a prime number, by using the fact that a non-prime number has 2 or more
+prime factors, but a prime has only 1 prime factor.
+
+
+e.g.,
+> Ans5 23 1 4
+23 is PRIME
+1 is NOT PRIME
+4 is NOT PRIME
+>
+

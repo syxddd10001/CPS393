@@ -1,0 +1,32 @@
+
+(a) How would you run this command in the background: 
+    find / -name "a*" 2>/dev/null
+Answer:
+  Various correct answers, such as:
+    > find / -name "a*" 2>/dev/null &
+  or
+    > find / -name "a*" 2>/dev/null
+    ctrl-z
+    > jobs      #assume find is job 1
+    > bg %1
+  or 
+    same as above but using ps and PID
+
+(b) Once the above command is running in the background, 
+    how would you terminate it?
+Answer:
+  Lots of correct answers, such as:
+    > jobs      #assume command is job 5
+    > kill %5   #where X is find's job number 
+  or
+    > ps        #assume command has process ID 1234
+    > kill 1234
+  or
+    > ps        #assume command has process ID 1234
+    > fg 1234   
+    ctrl-c
+  or
+    > jobs      #assume command is job 5
+    > fg %5     
+    ctrl-c
+

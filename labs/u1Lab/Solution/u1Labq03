@@ -1,0 +1,7 @@
+#!/bin/bash
+#dwoit's program. Yours will have your own userid.
+cd
+ls -ld /home/dwoit/cps393/labs/u1Lab/myInfo.txt cps393/labs
+
+#note that if you do not use the -d option, then the contents
+#of dir labs are listed, not the dir itself

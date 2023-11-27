@@ -1,0 +1,41 @@
+
+A program consists of these files:
+   -listM.c         A main function, creates an empty list
+   -listAddFront.c  function to add one item to front of list
+   -listPrint.c     function to print list
+   -list.h          definition of List
+   -listAddFront.h  header for listAddFront
+   -listPrint.h     header for listPrint
+
+   The program creates a List, adds characters a-f to it, and then
+   prints the resulting list.
+
+(a) Compile and execute the program to verify its output is correct.
+    In file ans6.txt, type the command you used to produce the 
+    executable program. 
+
+(b) Create ans6.c, containing the definition of function listRemoveRear 
+    (prototype given in listRemoveRear.h) as follows:
+    -REMOVE the LAST item from the given list and FREE its storage 
+    -PASS the removed character back to main through the second argument
+    -RETURN 0 if the list was already empty (no remove occurs), and 1 
+     otherwise
+
+Test your Function:
+    -a main is provided in listMRR.c to help you test your function
+    -compile listMRR.c with ans6.c 
+    -compile listMRR.c with ans6.c and the other necessary files, and
+     run it to test your listRemoveRear function. 
+
+Expected output is: 
+
+> ./a.out
+List is:  e  d  c  b  a
+removed a. List is now: e  d  c  b
+removed b. List is now: e  d  c
+removed c. List is now: e  d
+removed d. List is now: e
+removed e. List is now:
+cannot remove from empty list
+>
+

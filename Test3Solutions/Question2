@@ -1,0 +1,34 @@
+
+Given program arr2.sh is incomplete.  It is supposed to:
+  -read an N*N binary matrix into array A
+  -print the sum of entries on A's principal diagonal 
+  -print the sum of entries on A's secondary diagonal
+  -print A
+where 
+ -Principal diagonal runs top left to bottom right 
+ -Secondary diagonal runs bottom left to top right 
+
+COPY FILE arr.sh TO ans2.sh
+MODIFY ans2.sh to complete function DiagSum. 
+DiagSum requires one argument, expected to be "P" or "S". 
+ -if "P" it prints the principal diagonal sum
+ -if "S" it prints the secondary diagonal sum
+
+An example of executing the completed program is:
+> cat testfiles/q2.in1
+4
+1011
+0001
+1010
+0101
+> ans2.sh <testfiles/q2.in1
+Principal diagonal sum=3
+Secondary diagonal sum=1
+Matrix A:
+1011
+0001
+1010
+0101
+>
+
+

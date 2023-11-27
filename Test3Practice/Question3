@@ -1,0 +1,9 @@
+
+In ans3.txt type your answer the following questions:
+
+(a) How would you run this command in the background?
+    find / -name "a*" 2>/dev/null
+
+(b) Once the above command is running in the background, 
+    how would you terminate it?
+

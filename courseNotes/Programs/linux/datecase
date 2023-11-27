@@ -1,0 +1,33 @@
+#!/bin/bash
+#Source: datecase
+mnth=`date +%m`    #formats it as mm (month)
+case ${mnth} in
+     01)
+          echo "January"
+          ;;
+     02)
+          echo "February"
+          ;;
+     03)
+          echo "March"
+          ;;
+     04)
+          echo "April"
+          ;;
+     09)
+          echo "September"
+          ;;
+     10)
+          echo "October"
+          ;;      
+     11)
+          echo "November"
+          ;;
+     12)
+          echo "December"
+          ;;
+     *)
+          echo "some other month"
+          ;;
+esac
+exit 0

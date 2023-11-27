@@ -1,0 +1,15 @@
+
+Program Ans4 uses one find command to list all the entries in the
+filesystem that are DIRECTORIES, with names containing the character 
+'D', starting at directory A2 from PracQuest2.
+Remember, Ans4 is located in, and run from, your test home directory.
+
+The find command should still work even if the contents of A2 change
+later (still outputs all directories whose name contains a 'D'). 
+
+Ans4 should produce exactly this output (line order may differ):
+A2/D1
+A2/D2
+A2/D2/D4
+A2/D3
+

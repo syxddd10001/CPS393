@@ -1,0 +1,79 @@
+Polymorphism in C++ may be 
+ -Compile time polymorphism 
+    -Function overloading, Operator overloading, Function Overriding
+ -Run time polymorphism (Virtual functions)
+
+We already saw examples of Function and Operator overloading.
+
+Function Overriding:
+Allows a subclass (child class) to implement a method that was
+already implemented by one of its super classes (parent classes).
+
+Virtual Function:
+A function in a base class, which is overridden in a derived class.
+
+
+
+----------------------------------------
+Consider these from Alan Melor and Anshul (Quara Digest Mar 16 2023)
+
+Why Polymorphism is better than just doing an if-statement.
+
+It’s better than an if because it does something brilliant with the pesky code block:
+
+function someFunction() { 
+  if condition { 
+    PESKY CODE BLOCK 
+  } 
+} 
+The issue is that the pesky code block is totally hard-coded into that if statement. And that means
+the pesky code block is hard-coded into someFunction.
+
+This is known technically as a bloody nuisance. If you want to change the way that someFunction()
+works, you’re dragging around that pesky code block, even though it has nothing to do with your
+future changes. There it is - hard coupling onto some specific implementation.
+
+Polymorphism externalises that pesky code block. The code that runs conditionally is now outside
+someFunction(). That coupling is broken. It looks more like:
+
+function someFunction() { 
+   polymorphicThing.doYourThing(); 
+} 
+So as we change ‘polymorphicThing’ to point to different implementations, we get to run different
+pesky code blocks, without having to change anything in someFunction(). Or have that problem-level
+understanding hard-coded in.
+
+The classic example I still love is drawing shapes on a screen. Get a polymorphic Shape with a draw()
+method and the code to draw a circle, a rectangle and a triangle looks like this:
+
+function drawAllShapes() { 
+  for (Shape s : allShapes) { 
+     s.draw(); 
+  } 
+} 
+As you can see, there is no hard-coded knowledge about how to draw a circle or triangle or what have
+you. Just shape, draw yourself however you like. No pesky code block dedicated to drawing a square.
+It has gone. It has been externalised.
+
+This allows us to split up, test and extend the code so much more easily than an ever-growing list if
+if statements with their pesky code blocks.
+
+That’s worth having.
+
+----------------------------------------
+And, additionally, from Anshul:
+
+In real world analogy, imagine when you want to take your vehicle to a workshop to change the tires.
+
+In the first version of if else way of doing things, you will need a mechanic who has been trained to
+change tires of everything from Lego toys, bicycle, motorbike, car, truck, train. If you want to find
+a mechanic to change airplane tires, the mechanic should already know about changing tires on Lego
+toys, bicycle, motorbike, car, truck, train. Depending on what vehicle is in front, the mechanic will
+use the appropriate method.
+
+In the polymorphism world, you would simply train different mechanics specialized in their vehicles.
+An airplane mechanic doesn't need to learn how to change train tires.
+
+You take your vehicle to the appropriate workshop and you find a mechanic specialized in changing
+tires for that vehicle.
+

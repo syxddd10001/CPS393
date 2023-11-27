@@ -1,0 +1,89 @@
+CPS393 c4Lab
+
+Structures, Linked Lists
+
+-------------------------------------------------------------------------------
+EXAMPLES:
+
+In the following questions, unless the question states otherwise,
+assume correct input (number, format, etc. )
+
+PROGRAM NAMES FOR LAB:
+
+ c4Labq01.c       for question 1
+ c4Labq02main.c   for question 2
+ c4Labq02add.c    for question 2
+ c4Labq02add.h    for question 2
+
+-------------------------------------------------------------------------------
+
+
+1. Write a program that will read in a contact list from a file and print it 
+   on stdout, in reverse order, with "nice" formatting. 
+
+The contact list file: 
+   -is in csv format (comma separated values)
+   -contains one contact per line
+   -each contact has the following fields, separated by commas:
+         LastName,FirstName,Level
+   -A contact's "Level" is an integer, as follows:
+    0-9   Family, where 0=closest family, and 9=farthest
+    10-19 Friend, where 10=closest friend, and 19=farthest
+    20-29 WorkPerson, where 20=closest colleague, and 29=farthest
+   -an example contact list file is the file: contactList
+   -must have the exact format specified above
+   -may have any number of contacts
+   -first line of contact list file is an integer indicating the
+    number of contacts in the file
+   -see file contactList for an example file
+
+The Contact Array:
+   -Your program must place all contacts into an array of structures,
+    which must be defined as follows:
+
+    typedef struct contact {
+       char LastName[MAX_NAME];
+       char FirstName[MAX_NAME];
+       int  Level;
+       } contact_t;
+    contact_t contactArray[MAX_CONTACTS];
+
+The Algorithm:
+  -open the contact file, which is supplied as a command line argument
+  -read the contacts into the contact array (assume the number of contacts
+   in the file is < MAX_CONTACTS). 
+  -print the contact array in reverse order, formatted like the 
+   sample executable print_contacts1 formats its output
+   To see how the sample executable formats its output, run it with the
+   given contactList, as in:
+   ./print_contacts1 contactList
+
+
+Reading Contacts:
+  -do this however you wish. If you want to use fscanf, here are some pointers:
+  -the following fscanf will read the number of contacts, AND the newline
+    fscanf(fp,"%d\n",&num_contacts);
+  -the following fscanf will read one contact. Note: 
+   %[^,] means read all characters up (but not including) to a comma
+   %*c   means read a character, but throw it away (there is no corresponding 
+         match in the variable list)
+    for (i=0;i<num_contacts;i++) {
+      fscanf(fp,"%[^,]%*c%[^,]%*c%d\n",&clist[i].LastName, &clist[i].FirstName, &clist[i].Level);
+    }
+
+2. In notes c4.txt we created a linked list program from files: addmain.c add.c add.h
+   The add function added items to the HEAD of the list, so adding
+   'a' then 'b', then 'c', ... then 'f' resulted in a linked list like this:
+   List: f->e->d->c->b->a
+   (Files are in /usr/courses/cps393/dwoit/courseNotes/Programs/c/c4/ )
+
+   Copy these 3 files into c4Labq02main.c c4Labq02add.c c4Labq02add.h
+   and modify as necessary so that entries are added to the TAIL of the
+   list instead of the head. So after adding 'a', then 'b', then 'c', ... then 'f',
+   the linked list would be like this:  
+   List: a->b->c->d->e->f
+
+
+
+   
+

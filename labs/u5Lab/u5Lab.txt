@@ -1,0 +1,119 @@
+CPS393 u5Lab
+
+-------------------------------------------------------------------------------
+EXAMPLES:
+
+In the following questions, unless the question states otherwise,
+assume correct input (type and number of arguments, etc. )
+
+PROGRAM NAMES:
+
+Type your answer to question 1 in file named: u5Labq01.txt
+
+Name the rest of your shell programs as usual: u5Labqx.sh where x is the 2-digit question number.  
+e.g., u5Labq02.sh for question 2.
+
+-------------------------------------------------------------------------------
+
+1. Program factorial.sh has some errors, so does not work as expected.
+
+   THIS IS HOW IT IS EXPECTED TO RUN:
+
+   Program factorial.sh reads a non-negative integer and prints its factorial, as follows:
+   > ./factorial.sh
+   Enter a number: 3
+   3! = 3*2*1 = 6
+   >
+   When input is 0 or 1, the intermediate product is omitted:
+   > ./factorial.sh
+   Enter a number: 0
+   0! = 1
+   > 
+   When input is NOT a non-negative integer, prints factorial is invalid, as follows:
+   > ./factorial.sh
+   Enter a number: -3
+   -3! is undefined
+   > ./factorial.sh
+   Enter a number: abc
+   abc! is undefined
+   >
+
+   1.1 Copy factorial.sh to your filespace and run it with input 3. Note that output
+       is not as expected. There are error messages. Use bash -x to help you figure
+       out why you get THE FIRST error message. Modify the program so that that first
+       error no longer occurs when you run the program with input 3.
+       In u5Labq01.txt explain what the error was, how bash -x helped you find the
+       problem, and how you fixed it.
+   1.2 Run your updated factorial.sh with input 3 again. Your original first error
+       message should be gone now, but more error messages remain. Use bash -x to
+       help you understand the new first error message. Fix it. In u5Labq01.txt 
+       explain what the error was, how bash -x helped you find the problem, and 
+       how you fixed it.
+   1.3 Verify your program produces expected output for input 3 now (as above). 
+       Run it with -3 and note that it does NOT produce the output expected (shown 
+       above). It should print: -3! is undefined
+       but instead it prints: -3! = 1
+       Use bash -x to understand the problem. Fix it. Explain in u5Labq01.txt.
+   1.4 Verify your fixed program now produces correct output (as above).
+   1.5 Copy program Solution/testFactorial.sh into the same directory as your 
+       factorial.sh and run it to test factorial.sh with various input. 
+       > ./testFactorial.sh factorial.sh
+       Verify your factorial.sh produces correct output (as above). 
+
+2. Recall bash's sequence expression {} prints a sequence of integers, e.g.,
+   > echo {2..5}
+   2 3 4 5
+   >
+   Recall that for input 3, correct output for fixed factorial.sh is:
+     3! = 3*2*1 = 6
+   We refer to the middle term of this output, "3*2*1", as the product-string.
+
+   2.1 Copy your fixed factorial.sh to u5Labq02.sh and modify it so that the 
+       else-part does NOT use a loop. Instead, it must use the following 2-line
+       code sequence to produce the required output.
+       1. Create the product-string for the given input, and assign it to 
+          variable prodstring (see 2.2 below)
+       2. echo the correct output line (see 2.3 below)
+
+   2.2 Create prodstring for the given input as follows:
+        -use a sequence expression to get the correct integers, 
+	-pipe that to rev to reverse the integers, 
+	-pipe that to tr to change each space to '*', 
+       Use echo, $(), and eval as needed to complete the assignment. 
+      
+   2.3 The echo statement includes $prodstring, and $(( )) 
+
+   2.4 Test your u5Labq02.sh to ensure it produces identical output to
+       Solution/factorialFixed.sh
+
+3. Write a shell program that prints each sentence of stdin on its own
+   line, where sentences are strings of characters ending in a period.
+   Your program MUST use xargs to send each sentence to stdout. It can
+   accomplish this by using . as the delimiter, and outputting one field
+   per line. Your shell program may also use tr and/or sed to prepare
+   and/or clean-up the output; for example, you might find it useful to
+   change all the newlines to spaces before piping to xargs. You might
+   also need to remove those newly-added spaces after xargs processing.
+   There are many approaches to splitting by sentence. However, your
+   solution must use xargs. It can be as simple as a single pipeline
+   of code. 
+   e.g.,
+
+   > cat sentenceTest
+   GPT4 can write code, although not always correctly. There's a lot of poor
+   code on the internet. Some of that poor code may have been part of
+   GPT's training. For example, it has been shown to produce code
+   vulnerable to SQL-injection attacks. This security testing was outlined
+   in an article in Nature 618 (7964): 422–423.
+   > 
+   > cat sentenceTest | ./u5Labq03.sh
+   GPT4 can write code, although not always correctly
+   There's a lot of poor code on the internet
+   Some of that poor code may have been part of GPT's training
+   For example, it has been shown to produce code vulnerable to SQL-injection attacks
+   This security testing was outlined in an article in Nature 618 (7964): 422–423
+   >
+
+
+
+

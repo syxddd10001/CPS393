@@ -1,0 +1,22 @@
+Program Ans6 takes two command line arguments, assumed to be a
+string containing no whitespace, and a readable file. 
+Ans6 prints a count of the number of WORDS in the file that start 
+with the given string.
+Assume words on a line are separated by spaces.
+Ans6 MUST use one or more loops to read words of the file.
+
+
+e.g.,
+> cat Ans6.infile
+abcdef abc abcdog xyz
+xycdef xyc xxy    art
+mouse abcmouse Xymouse
+>
+> Ans6 abc Ans6.infile
+4
+> Ans6 xy Ans6.infile
+3
+> Ans6 WWW Ans6.infile
+0
+>
+

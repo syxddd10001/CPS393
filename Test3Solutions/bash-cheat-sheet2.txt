@@ -1,0 +1,512 @@
+
+
+LEGEND
+------
+Don't include the '=' in your commands. It just says what command does.
+'...' means that more than one file can be affected with one command 
+eg, rm file.txt file2.txt movie.mov ... 
+dir is short-form for directory
+if an entry name has spaces, use quotes: eg, ls 'my file'
+
+
+BASIC TERMINAL NAVIGATION
+-------------------------
+ls               = list all entries (files and dirs)
+ls .             = as above ( . is current dir)
+ls dir1 ...      = list entries inside directory dir1 etc
+ls f1 f2 ...     = list entries named f1, f2, etc
+ls -l            = long listing (details)
+ls -l *.jpg      = long list jpeg files only
+ls -d dir1 ...   = list dir names, not contents
+
+cd dirName  = change directory (go to dir dirName)
+cd          = go to home directory
+cd ~        = go to home directory
+cd ..       = go up one dir, tip: ../../../
+cd -        = go to previous dir
+
+pwd         = prints current directory
+
+
+BASIC FILE MANIPULATION 
+-----------------------
+Note cat, head, tail use stdin if no arguments given
+
+cat f1 f2 ...    = show contents of file(s) 
+
+head fileName    = top 10 lines of fileName
+head -4 fileName = top 4 lines of fileName
+
+tail fileName    = bottom 10 lines of fileName
+tail -4 fileName = bottom 4 lines of fileName
+
+mkdir newDir     = create new directory named newDir
+mkdir myDir/Xyz  = create new dir Xyz under myDir
+rmdir myDir ...  = delete dir(s) myDir etc
+
+cp image.jpg newimage.jpg  = copy and rename a file
+cp image.jpg dirName/      = copy into directory dirName
+cp image.jpg dirName/newimage.jpg  = copy into dirName and rename
+cp -R stuff otherSutff     = copy and rename a directory
+cp *.txt stuff/ = copy all files ending in .txt into dir stuff
+
+mv file.txt Docs/      = move file.txt into dir Docs
+mv dirName newdirName  = rename dir
+mv f1 f2               = rename file
+mv dirName/ ..         = move dir dirName up in hierarchy
+
+rm f1 f2 ...     = delete file(s)
+rm -i f1 f2 ...  = ask for confirmation for each delete
+rm -f f1 f2 ...  = force deletion (no error messages)
+rm -r dirName/   = delete filetree rooted at dir dirName (be careful!)
+
+touch f1 f2 ...  = create or update file(s)
+
+
+FIND
+----
+find -name "Name"    = list entries named Name in filetree rooted at current dir
+find . -name "Name"  = list entries named Name in filetree rooted at current dir 
+find AB -name "Name" = list entries named Name in filetree rooted at dir AB
+find . -name "text*" = list entries whose name starts with text
+find . -name "*text" = list entries whose name ends   with text
+find . -type d       = list directories only
+find . -type f       = list files only 
+find . -name "*abc" -type d = dirs in filetree whose names end in abc
+
+
+EXTRACT, SORT AND FILTER DATA
+-----------------------------
+these work on stdin if no file(s) given
+
+grep "text" f1 ...       = lines of f1, f2, etc containing string "text"
+grep -v "text" f1 ...    = lines NOT containing string "text"
+grep -x "text" f1 ...    = lines containing exactly/only text (whole line)
+grep -w "text" f1 ...    = lines containing the word text
+grep -i "text" f1 ...    = letters in "text" can be any case
+grep -r "text" dirName/  = recursively search all files in filetree
+                           under dir dirName
+
+Grep Regular Expressions:
+.       = any character, except newline (like ? in glob)
+*       = 0 or more repetitions of previous character (unlike glob)
+^       = beginning of line
+$       = end of line
+[...]   = any character inside the brackets (like glob)
+[^...]  = any character not inside the brackets (like ! in glob)
+\{m\}   = exactly m repetitions of previous character
+\{m,\}  = at least m repetitions of previous character
+\{m,n\} = any number of repetitions of prev char between m and n inclusive
+\<      = beginning of word
+\>      = end of word
+         remember to quote these as in: grep '\<theWord\>' a_file
+\(str\) = group string str into a substring
+
+eg,
+grep '^Assignment' f1 ...    = lines starting with Assignment
+grep -v '^Assignment' f1 ... = lines not starting with Assignment
+grep 'Assignment$' f1 ...    = lines ending with Assignment
+grep 'd.g' f1 ...            = lines containing dag, dbg, dcg, d0g, d1g, etc
+grep 'su*m' f1 ...           = lines containing sm, sum, suum, suuum, etc
+grep 'suu*m' f1 ...          = lines containing     sum, suum, suuum, etc
+grep '\<so\>' f1 ...         = the word so (vs. social, absolute)
+grep '[A-Za-z][A-Za-z]*' f1 ...  = lines containing ANY alpha string (no blank
+                                   lines, no lines with only digits, etc)
+grep '^[A-Za-z][A-Za-z]*$' fname  = lines containing ONLY alpha characters
+grep 'A\(bc\)\{2,3\}D'       = lines containing AbcbcD or AbcbcbcD
+
+Extended Regular Expressions (grep -E ):
+|       OR
++       1 or more repetitions of previous character
+( and ) do not need escaping (substring)
+{ and } do not need escaping (repetition)
+\n      backreference: \1 replaced by substring 1, \2 by substring 2, etc
+
+eg,
+grep -E 'dog|cat|bird' f1 ...  = lines with at least 1 of dog, cat, or bird
+grep -E '[A-Za-z]+' f1 ...     = lines with at least one alpha char
+grep -E 'A(ab){2,3}B' f1 ...   = lines containing AababB or AabababB
+grep -E 'A([aei]+)B(.*)C\2\1' f1 ... = lines containing strings such as:
+                                       AieiBxyzCxyziei  or  AiBCi etc
+
+sed          = stream editor. sends lines of file(s) or stdin, possibly
+               modified, to stdout
+sed -e "s/linux/LINUX/" f1    = prints lines of f1 with first occurrence of
+                                linux on each line changed to LINUX
+sed -e "s/linux/LINUX/g" f1   = prints lines of f1 with every linux changed 
+                                to LINUX
+
+Regular Expressions similar to grep:
+sed -e "s/xx*/1234/" f1      = first occurrence of x or xx or xxx etc on each
+                             line changed to 1234
+sed -e "1,5 s/HI/hi there/"  = first occurrence of HI on lines 1-5 changed to
+                              hi there
+sed -e "1,5 !s/HI/hi there/" = first occurrence of HI on lines except 1-5 
+                               changed to hi there
+sed -e "/^WoW/ s/W/MM/g"     = only apply change to lines starting with WoW
+sed -e 's/\(...\)\(...\)/\2\1/' = swaps first 3 chars on line with next 3
+eg,
+> echo 'ABCabc'  | sed -e 's/\(...\)\(...\)/\2\1/'
+abcABC
+
+
+tr             = sends stdin to stdout with some characters changed
+tr ":" ";"     = changes all colons into semi-colons
+tr "A-Z" "a-z" = changes all uppercase to lowercase letters
+tr " " "\n"    = changes all blanks to newlines
+tr -d "\n"     = removes all newline chars
+tr -s " " " "  = replaces all strings of one or more spaces by a single space
+
+
+sort         = send content of files or stdin, sorted, to stdout
+sort f1      = print lines of f1 alphabetically 
+sort -u f1   = same, but omit duplicate lines after sort (unique)
+sort -r f1   = reverse sort
+sort -n f1   = numeric sort
+
+
+wc           = count of lines, words, characters, of files or stdin, to stdout
+wc f1 ...    = nbr of lines, words, chars of file(s)
+wc -l f1 ... = nbr of lines only
+wc -w f1 ... = nbr of words only
+wc -c f1 ... = nbr of chars only
+
+
+cut             = cut a part of a file or stdin, send to stdout
+cut -c8 f1 ...  = outputs 8th column of each line of file(s) f1, etc
+cut -c5-7,25-   = outputs columns 5,6,7,25... of each line of stdin
+cut -f2 f1      = outputs second field of each line of file f1
+                          (assumes fields delimited by one tab)
+cut -d' ' -f3   = outputs field 3, fields delimited by one space
+
+
+tac             = cat backwards (last line first, second last line next, etc)
+rev             = reverse lines characterwise
+
+
+OTHER COMMANDS
+--------------
+diff f1 f2      = print on stdout differences between files f1 and f2
+date            = display date and time
+date +%m        = formats it as mm (month)
+echo "str"      = print string str on stdout
+
+
+
+FILE PERMISSIONS
+----------------
+
+ls -l             = long listing shows permissions of entries
+chmod             = changes permissions on entries
+
+chmod u+w f1 ...  = add write perms for owner/user of entry f1 etc
+chmod go-r f1 ... = remove read perms for group and other of entry f1 etc
+chmod ug=rx,o-r-w f1 ... = set user and group perms to r-x and remove 
+                           rw perms for other of entry f1 etc
+chmod 160 f1 ...  = set --x for user/owner, rw- for group and --- for other
+                    for entry f1 etc
+
+
+REDIRECTION
+-----------
+
+> f1          = redirect stdout to file f1 (overwrite)
+>> f1         = redirect stdout to end of f1 (append)
+2> f1         = redirect stderr to file f1 (overwrite)
+2>&1          = redirect stderr to stdout
+&> f1         = redirect both stdout and stderr at once to f1
+>f1 2>&1      = same as above
+> /dev/null   = throw away stdout (redirect to garbage)
+2> /dev/null  = throw away stderr (redirect to garbage)
+< f1          = copy contents of f1 to stdin
+
+
+PIPES
+-----
+
+cmd1 | cmd2                   = stdin of cmd2 is the stdout of cmd1
+eg,
+ls -t | head -5               = list the 5 most recently modified entries
+cat ATb | head -54 | tail -1  = print line 54 of file ATb
+
+
+GLOB CONSTRUCTS
+---------------
+
+*          = string of characters (incl. null string)
+?          = single character
+[...]      = single char from set of chars within the brackets
+[!...]     = single char NOT in set of chars within the brackets
+
+eg,
+ls *abc    = list entries whose name ends in abc
+ls ????    = list entries whose name is exactly 4 characters long
+ls [m-q]*V = list entries whose name starts with one of m,n,o,p,q
+             and ends with V
+
+PATTERNS IN SHELL ( might need shotp -s extglob )
+-----------------
+*(exp)           = 0 or more occurrences of exp
++(exp)           = 1 or more occurrences of exp
+?(exp)           = 0 or 1 occurrences of exp
+@(exp1|exp2|...) = exp1 or exp2 or ...
+!(exp)           = entries that do NOT match exp
+
+eg,
+ls A*(x)         = entries whose name starts with A and is followed 
+                   by zero or more x characters
+ls @(*xx|*ak)    = entries whose name ends in xx or ak
+
+
+SPECIAL CHARACTERS
+------------------
+
+\          = protects character following it from being expanded
+;          = separates commands
+~          = home directory
+
+
+
+VARIABLES
+---------
+${HOME}        = home directory environment variable
+myvar=abc      = sets variable myvar to value abc
+declare -i Y=3 = creates integer variable Y and sets to 3
+${myvar}       = replaced by value of variable myvar
+${#myvar}      = replaced by length of value of myvar
+${myvar:3}     = replaced by chars 4 onward of value of myvar
+${myvar:3:5}   = replaced by chars 4-8 of value of myvar
+eg,
+> X="abc DEF ghi" ; declare -i Y=3
+> echo "${X} ${Y} ${#X} ${X:4:3}"
+abc DEF ghi 3 11 DEF
+>
+
+
+QUOTING
+-------
+''            = nothing inside evaluated
+""            = evaluates variables, command substitution, ` and \
+``            = command substitution
+eg,
+X=2 ; echo "$X *"             = prints 2 *
+X=2 ; echo '$X *'             = prints $X *
+mth=`date +%m` ; echo ${mth}  = prints 10 (assuming it is October)
+
+
+COMMAND SUBSTITUTION
+--------------------
+$(cmd)         = replaced with stdout from running command cmd
+`cmd`          = same thing
+
+
+TESTING CONDITIONS
+------------------
+test                  = evaluate a condition and put result in $?
+[ ]                   = alternate syntax for test
+test -r f1 ; echo $?  = prints 0 if f1 is readable and 1 otherwise
+[ -d d1 ] ; echo $?   = prints 0 if d1 is a directory and 1 otherwise
+
+for operators see man test. Some are: 
+-r, -w, -x, -f, -d       =  readable, writable, executable, file, dir
+-eq, -ne, -lt, -ge, -le  = equal, not equal, less than, etc
+-o -a                    =  or, and
+=, !=                    =  strings equal, not equal
+-z, -n                   =  string has length zero, non-zero length
+
+eg,
+[ -x f1 -a -d B ] ; echo $? = prints 0 if f1 has x perms and B is a dir
+
+
+MATH
+----
+declare -i x           = makes integer variable x
+declare -i x=1         = makes int variable x set to 1
+x=x+1                  = adds 1 to integer variable x
+
+$(( ))                 = does math within, even if variables not integers
+b=5 ; a=$(($b * 2))    = sets a to 10
+
+Operators: +, -, *, /, %, **, ==, !=, <, >, etc.
+
+
+CONTROL STRUCTURES
+------------------
+;               = separates commands
+()              = execute in subshell and group stdout
+{}              = execute in current shell and group stdout
+
+(cat f1; cat f2) | grep abc  = prints lines of f1 and f2 containing abc
+
+
+IF-STATEMENT
+------------
+
+eg, 
+if [ -e f1 ] ; then
+   echo "f1 exists"
+fi
+
+
+if [ -f f1 ] ; then  
+  echo "f1 is a file"
+elif [ -d f1 ] ; then
+  echo "f1 is a dir"
+else
+  echo "f1 is something else"
+fi
+
+
+FOR-LOOPS
+---------
+
+eg,          = prints abc def ghi
+for var in abc def ghi ; do
+  echo -n "${var} "
+done
+
+eg,          = prints the program's command line args one per line
+for i ; do
+  echo ${i}
+done
+
+eg,          = long list of all files whose name starts with X
+for i in X* ; do
+   ls -l $i
+done
+
+eg,          = prints 1 2 3 4 5
+             = note no variables are allowed inside { } 
+for i in {1..5} ; do
+  echo -n "$i "
+done
+
+
+WHILE-LOOPS
+-----------
+
+eg,         = prints 1 2 3 each on own line
+x=1
+while [ $x -le 3 ] ; do
+  echo $x
+  x=$((x+1))
+done
+
+
+READ
+----
+read v1         = reads line of stdin into variable v1
+read v1 v2 v3   = reads first word into v1, second into v2 and 
+                  rest of line into v3
+read -n3 var    = reads 3 chars of stdin into variable var
+
+eg,             = prints lines of stdin on stdout
+while read line ; do
+   echo $line
+done
+
+eg,             = write lines of stdin containing XYZ into file f1
+while read line ; do
+  if [ "$(echo $line | grep XYZ)" ] ; then
+     echo $line
+  fi
+done > f1
+
+eg,             = print odd numbered lines of file f2
+declare -i n=1
+while read line ; do
+  if [ $((n%2)) -eq 0 ] ; then
+     echo $line
+  fi
+  n=n+1
+done < f2
+
+
+INDEXED ARRAYS
+--------------
+A=(cat dog emu)  = sets A[0]=cat A[1]=dog etc.
+A[0]=cat         = or set individually
+A[1]=dog
+A[2]=emu
+echo ${A[2]}     = prints emu
+echo ${A[*]}     = prints cat dog emu  Note @ same as *
+echo ${#A[*]}    = prints 3
+
+ASSOCIATIVE ARRAYS
+------------------
+declare -A Z     = declares Z to be associative array
+Z[cow]=moo       = set value
+Z[horse]=neigh   = set value
+echo ${Z[cow]}   = prints moo
+
+
+FOREGROUND/BACKGROUND PROCESSING
+--------------------------------
+command &        = executes command in background
+ps               = displays list of processes
+jobs             = displays list of jobs
+fg %2            = bring job 2 to foreground
+fg 123456        = bring process with ID 123456 to foreground
+bg %1            = move job 1 to background
+bg 123456        = move process with ID 123456 to background
+kill %1          = terminate job 1
+kill 123456      = terminate process with ID 123456
+
+
+FUNCTIONS
+---------
+fun1 ( ) {       = define function fun1 which prints 
+   echo $2       = its second argument, and 
+   echo $#       = its number of arguments, and
+   echo $X       = value of its calling shell's variable X, and
+   X=99          = modifies its calling shell's X 
+}
+
+local x=0        = x is function local variable
+               
+#!/bin/bash      = when run: AB z1 z2 z3
+#source AB       = prints:   b z2
+fun2 () {   
+  echo -n "$2 "
+  echo "${A[2]}"
+}
+A=($0 "$@")
+fun2 a b c d
+
+DEBUGGING SHELL PROGRAM
+-----------------------
+bash -x pgm      = displays every command in pgm with variables
+                 = replaced by their values
+bash -v pgm      = displays each line before executing, but
+                 = variables not replaced by values
+
+SHIFT
+-----
+shift            = shifts positional parameters one to the left
+                 =  new $1 $2 $3 etc become old $2 $3 $4 etc
+shift 4          = shifts positional parameters 4 to the left
+
+XARGS
+-----
+ls a* | xargs grep bash   = lists lines containing bash from all files
+                          = starting with a
+
+echo "a b c d" | xargs wc          = does: wc a b c d
+echo "a b c d" | xargs -n2 wc      = does: wc a b ; wc c d
+echo "a b c d" | xargs -n2 -p wc   = as above but prompts before doing each wc
+                                   = user responds "y" or "n" for each
+
+ls | xargs -I{} cp {} {}.bak       = copies every entry to same name with .bak 
+                                   = appended
+ls f? | xargs -I{} echo X{}Y       = assuming f? matches f1 f2 f3, prints
+                                   = Xf1Y
+                                   = Xf2Y
+                                   = Xf3Y
+
+EVAL
+----
+v1="cat fn | grep 5"
+v2="grep 3 | more"
+eval  "$v1 | $v2"                  = executes: cat fn | grep 5 | grep 3 | more
+
+

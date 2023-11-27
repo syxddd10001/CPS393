@@ -1,0 +1,51 @@
+
+Prof's run gave the following, but yours will have
+different output for the last 2 numbers:
+     3 4 5 32766 1806530560
+
+1.1 Suppose main's storage for A is as follows:
+      100  104  108  112  116        300 
+      ------------------------      -----
+      |    |    |    |    |   | ... |100|
+      ------------------------      -----
+      A[0] A[1] A[2] A[3] A[4]        A  
+
+    Then this line: int A[LEN]={1,2,3,4,5};
+    assigns memory as follows:
+      100  104  108  112  116        300  
+      ------------------------      ----- 
+      | 1  | 2  | 3  | 4  | 5 | ... |100| 
+      ------------------------      ----- 
+      A[0] A[1] A[2] A[3] A[4]        A     
+
+    Then this line: printit(A+2);
+    passes A+2 to printit. What's A+2? Since A is 100,
+    +2 adds 2 integers-worth of storage (8 bytes since
+    moons have 4-byte ints), giving 108.
+
+    Therefore, printit's X is 108 and printit sees 
+    array X as follows:
+      108  112  116  120  124  128  132          500
+      ----------------------------------        -----
+      | 3  | 4  | 5  |    |    |    |     ...   |108|
+      ----------------------------------        -----
+      X[0] X[1] X[2] X[3] X[4] X[5] X[6]  ...     X
+                
+    That's why output of printit starts at 3.
+
+
+1.2 Referring to the diagram above,
+    X[3] is whatever garbage happens to be in memory location 120
+    X[4] is whatever garbage happens to be in memory location 124
+    That's why the final 2 ints printed by printit are strange
+    numbers.
+    We cannot predict what's in memory locations 120 and 124, since
+    our program never allocated those memory locations, nor assigned 
+    anything to them. 
+
+1.3 The last 2 number may change because each time the program is 
+    executed, the OS might allocate it to a different region of
+    memory, so each new address will have its own left-over garbage.
+
+
+

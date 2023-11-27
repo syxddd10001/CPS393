@@ -1,0 +1,8 @@
+#!/bin/bash
+
+
+capitalize() {
+#converts first character to uppercase and remaining characters to lowercase
+#non-alphas are unchanged
+  casefold "$1"  |  sed -e 's/^[a-z]/\U&/'
+}

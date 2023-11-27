@@ -1,0 +1,68 @@
+CPS393 c1Lab
+
+Functions, separate compilation, makefiles
+
+-------------------------------------------------------------------------------
+EXAMPLES:
+
+In the following questions, unless the question states otherwise,
+assume correct input (format, etc. )
+
+PROGRAM NAMES FOR LAB:
+
+ c1Labq01.c   you create it.
+ c1Labq02M.c  Given. Main program.
+ c1Labq02F.h  Given. Prototype for function tocelsius
+ c1Labq02F.c  you create it. Implementation of tocelsius
+ Makefile     you create it. 
+
+-------------------------------------------------------------------------------
+
+
+1. Implement a program which reads a float from stdin (assumed to be a 
+   temperature in degrees Fahrenheit), converts to Celsius, and prints on
+   stdout. The conversion formula is: tempC = (tempF-32) / 1.8
+   Output must be formatted like the following example:
+   >
+   > gcc c1Labq01.c -o c1Labq01
+   > ./c1Labq01
+   70.0
+   70.0F = 21.1C
+   >
+
+2. File c1Labq02M.c contains a main program which normalizes a tab-delimited
+   csv file of temperatures. Output is identical to input except Fahrenheit 
+   temperatures are printed in Celsius. 
+
+   Main calls function tocelsius to convert a Fahrenheit temperature to Celsius. 
+   File c1Labq01F.h contains the prototype for tocelsius. 
+   IMPLEMENT tocelsius in file c1Labq01F.c using the formula from question 1.
+   Compile the function using: gcc -c c1Labq01F.c
+
+3. Compile c1Labq02F.c with the main program to produce executable c1Labq02 and 
+   test it. If you execute it with input temps.csv then your program's output 
+   should be identical to tempsC.csv. You can check they're identical using diff. 
+
+   > ./c1Labq02 < temps.csv  >myoutput.csv
+   > diff myoutput.csv tempsC.csv
+   > 
+       
+4. Create a makefile (in file Makefile) for your program c1Labq02. It must:
+      -update appropriately if the .h file changes 
+      -include rule for clean (remove object files) 
+      -include rule for veryclean (remove object files and c1Labq02)
+   Remember to use a TAB (not spaces) before each action.
+
+   Test your makefile by "updating" various files to ensure the minimum
+   recompilation is performed.  You can use the touch command to quickly 
+   update a file's timestamp. e.g.,
+   > make
+   gcc -c c1Labq02M.c
+   gcc -c c1Labq02F.c
+   gcc c1Labq02M.o c1Labq02F.o -o c1Labq02
+   > touch c1Labq02M.c
+   > make
+   gcc -c c1Labq02M.c
+   gcc c1Labq02M.o c1Labq02F.o -o c1Labq02
+   > 
+

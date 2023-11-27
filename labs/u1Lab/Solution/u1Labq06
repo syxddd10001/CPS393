@@ -1,0 +1,13 @@
+You can use this sequence of commands to determine if first 3 lines of F
+are identical to last 3 of L:
+
+> head -3 F >F3     #first 3 lines of F into file F3
+> tail -3 L >L3     #last  3 lines of L into file L3
+> diff F3 L3        #prints nothing if F3 identical to L3
+                    #prints differences if they differ
+
+Note could also use -s option of diff
+> diff -s F3 L3     #prints message if files identical and
+                    #prints differences if they differ
+
+

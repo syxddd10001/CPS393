@@ -1,0 +1,16 @@
+
+Program Ans5b takes one or more command line arguments, assumed to 
+be positive integers. For each argument it prints on stdout HOW MANY 
+prime factors it has.  Output must be exactly as below.
+
+Ans5b MUST use: 
+  -the factor command (to help find a number's prime factors)
+  -the wc command (to help count how many prime factors a number has)
+
+e.g.,
+> Ans5b 23 1 18
+23: 1 prime factors
+1: 0 prime factors
+18: 3 prime factors
+>
+

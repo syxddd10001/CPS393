@@ -1,0 +1,20 @@
+#!/bin/bash
+#if $1 has a single factor only, it is prime,
+#Lots of approaches. Here's one:
+#Ans4 cuts out the second factor. If it is not null, then
+#the number has at least 2 factors, and cannot be prime)
+#one approach
+for i ; do
+  if [ "`factor $i | cut -d' ' -f3`" ] ; then
+    echo $i is NOT PRIME
+  else
+    echo $i is PRIME
+fi
+done
+
+#another approach
+#for i ; do
+#  echo -n "$i is "
+#  if [ "`factor $i | cut -d' ' -f3`" ] ; then echo -n "NOT " ; fi
+#  echo PRIME
+#done

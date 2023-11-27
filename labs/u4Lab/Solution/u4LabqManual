@@ -1,0 +1,78 @@
+#!/bin/bash
+
+casefold() {
+#converts string to lower case
+#non-alphas are unchanged
+  echo "$1" | tr [A-Z] [a-z]
+}
+
+
+capitalize() {
+#converts first character to uppercase and remaining characters to lowercase
+#non-alphas are unchanged
+  casefold "$1"  |  sed -e 's/^[a-z]/\U&/'
+}
+
+title() {
+#converts first letter of each word to uppercase
+#actually, converts first letter after any non-alpha character to uppercase
+#and rest to lowercase
+   capitalize "$1" | sed -e 's/[^a-z][a-z]/\U&/g' 
+}
+
+endswith() {
+#returns 0 if $1 ends with $2 and 1 otherwise
+#caller needs to check $?
+#MANY ways to do this, such as using regex operator =~, bash parameter expansion,
+#case statement, grep with here-string input: grep -q "${2}$" <<< "$1"
+#This uses simple string comparison available in [[ ]]
+  if [[ $1 == *$2 ]] ; then return 0
+  else return 1
+  fi
+}
+
+#for first 3 functions above (capitalize, title, casefold), 
+# -using the function to update variable xyz, and 
+# -printing new value of xyz for manual verification by user
+#for endswith
+# -calling function with values that should make it return
+#  true and false, and
+# -printing return value for manual verification by user
+
+echo ""
+echo "--- check out this call to capitalize:"
+xyz="hI thERE 88evEryon2E"
+echo "  variable xyz is: $xyz"
+echo "  assigning result of capitalize \$xyz to variable xyz"
+xyz=$(capitalize "$xyz")
+echo "       xyz is now: $xyz"
+echo ""
+
+echo "--- check out this call to title:"
+xyz="hi the 2nd b3b3b3 and 3g3g3g"
+echo "  variable xyz is: $xyz"
+echo "  assigning result of title \$xyz to variable xyz"
+xyz=$(title "$xyz")
+echo "       xyz is now: $xyz"
+echo ""
+
+echo "--- check out this call to casefold:"
+xyz="this HAS 82--somE UppEr CaSe"
+echo "  variable xyz is: $xyz"
+echo "  assigning result of casefold \$xyz to variable xyz"
+xyz=$(casefold "$xyz")
+echo "       xyz is now: $xyz"
+echo ""
+
+echo "--- check out this call to endswith:"
+xyz="hi ther e"
+echo "  variable xyz is: $xyz"
+endswith "$xyz" "er e"
+echo -n '  endswith "$xyz" "er e" returns: '
+if [ $(echo $? ) -eq 0 ] ; then echo true
+else echo false ; fi
+echo -n '  endswith "$xyz" "er z" returns: '
+endswith "$xyz" "er z"
+if [ $(echo $? ) -eq 0 ] ; then echo true
+else echo false ; fi
+echo ""

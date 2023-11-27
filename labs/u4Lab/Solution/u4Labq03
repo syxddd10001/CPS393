@@ -1,0 +1,8 @@
+#!/bin/bash
+
+
+title() {
+#converts first letter after any non-alpha character to uppercase
+#and rest to lowercase (So String Is Capitalized Like A Title)
+   capitalize "$1" | sed -e 's/[^a-z][a-z]/\U&/g'
+}

@@ -1,0 +1,39 @@
+
+To compile main and tocelsius together into executable c1Labq02:
+> gcc c1Labq02M.c c1Labq02F.c -o c1Labq02
+>
+> #Here is input file temps.csv:
+> cat temps.csv
+temp	unit
+26.1	C
+78.1	F
+23.1	C
+25.7	C
+76.3	F
+77.3	F
+24.2	C
+79.3	F
+27.9	C
+75.1	F
+25.9	C
+79.0	F
+> #Here is example of running program with this input:
+> c1Labq02 < temps.csv 
+temp	unit
+26.1	C
+25.6	C
+23.1	C
+25.7	C
+24.6	C
+25.2	C
+24.2	C
+26.3	C
+27.9	C
+23.9	C
+25.9	C
+26.1	C
+> #This captures program's output and compares to file tempsC.csv
+> c1Labq02 < temps.csv > myoutput.csv
+> diff myoutput.csv tempsC.csv
+> #lack of output from diff means files are identical
+

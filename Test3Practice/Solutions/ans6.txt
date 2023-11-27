@@ -1,0 +1,18 @@
+Lots of acceptable answers. The most basic is:
+gcc listM.c listAddFront.c listPrint.c
+
+
+Many other possibilities, e.g.,
+gcc -c listM.c
+gcc -c listAddFront.c
+gcc -c listPrint.c
+gcc listM.o listAddFront.o listPrint.o
+
+Or could have mixed source and object. e.g.,
+gcc -c listAddFront.c
+gcc listM.c listAddFront.o listPrint.c
+
+Or could have renamed any of the output files. e.g.,
+gcc -o q6 listM.c listAddFront.c listPrint.c
+
+etc.

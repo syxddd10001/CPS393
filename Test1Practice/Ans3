@@ -1,0 +1,22 @@
+#!/bin/bash
+#sets files under D3 that have at least 1 digit after .
+#using ONE chmod command, specifying files using
+#ABSOLUTE path names and GLOB constructs.
+
+#Lots of approaches. Some are:
+chmod u=rw,g=r,o=x ~/A2/D3/*.[0-9]*
+#chmod u+r+w-x, g+r-w-x, o-r-w+x ~/A2/D3/*.[[:digit:]]*
+#chmod 641 ~/A2/D3/*.[0123456789]*
+
+#next one uses hard-coded explicit home directory (this particular
+#one assumes the test home dir is /home/eng201-34, but your actual
+#test home dir will differ:
+#chmod u=rw,g=r,o=x /home/eng201-34/A2/D3/*.[0-9]*  
+
+#Note glob must end up matching these two as required: f2.2 hi.67
+#Note perms can be numeric, or symbolic with = and/or +/- 
+
+
+#Note globs like this are not accepted because they target the
+#specific files, but won't work if filenames change:
+#chmod 641 ~/A2/D3/*.[26]*  

@@ -1,0 +1,8 @@
+#!/bin/bash
+
+source ./u4Labq01
+
+capitalize(){
+	casefold "$1" | sed -e "s/^[a-z]/\U&/"	
+}
+

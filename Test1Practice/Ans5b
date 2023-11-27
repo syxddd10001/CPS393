@@ -1,0 +1,13 @@
+#!/bin/bash
+#for each argument, prints its number of prime factors
+#must use factor to help determine number of prime factors
+#note 1 has no prime factors
+#
+#one approach
+declare -i pf
+for i ; do
+  pf=`factor $i | wc -w`
+  pf=pf-1
+  echo "$i: $pf prime factors"
+done
+

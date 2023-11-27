@@ -1,0 +1,186 @@
+
+Summary:
+
+Found 3 errors. Corrected program is in factorialFixed.sh
+If you do
+diff ../factorial.sh factorialFixed.sh
+you see the incorrect lines vs. corrected lines:
+12c12
+< if [ "$(echo $number | grep [^0-9])" ] ; then
+---
+> if [ "$(echo $num | grep [^0-9])" ] ; then
+18c18
+< if [ $num < 2 ] ; then
+---
+> if [ $num -lt 2 ] ; then
+26c26
+<     total = total * $i
+---
+>     total=total*$i
+
+Prof suggests fixing errors one-by-one, in order they're reported:
+
+Run program and enter 3.
+It produces some output AND some error messages. 
+  > echo 3 | ./factorial.sh
+  ./factorial.sh: line 18: 2: No such file or directory
+  3! = 3*./factorial.sh: line 26: total: command not found
+  2*./factorial.sh: line 26: total: command not found
+  1 = 1
+  >
+The program's output is all mixed in with error messages, so
+it's helpful to throw away the errors and see if maybe the output is OK:  
+  > echo 3 | ./factorial.sh 2>/dev/null
+  3! = 3*2*1 = 1
+  >
+That tells us the output is mostly OK, but still incorrect, 
+since should be: 3! = 3*2*1 = 6
+So perhaps these error messages can point us to the problem.
+The first error above says: 
+  ./factorial.sh: line 18: 2: No such file or directory
+So there's a problem with line 18, which is:
+  if [ $num < 2 ] ; then
+To help us figure out what the problem is, run the program with
+bash -x as in: 
+  > echo 3 | bash -x ./factorial.sh
+  + read -p 'Enter a number: ' num
+  ++ echo
+  ++ grep '[^0-9]'
+  + '[' '' ']'
+  + '[' 3 ']'
+  factorial.sh: line 18: 2: No such file or directory
+  etc...
+This tells us that line 18 ended up with this in it: [ 3 ]
+Line 18 in the program is this:
+  if [ $num < 2 ] ; then
+And from the above, we know it evaluated to this:
+  if [ 3 ] ; then
+AND produced a message saying 2: no such file or directory
+This tells us that bash thought we were asking it to do something
+with a file/directory NAMED 2. So we realize that bash took the
+" < 2"  in that line to mean REDIRECT input from file named 2.
+Hence the error, since there's no file named 2. But we know we
+weren't trying to redirect, we were trying to do a logical test 
+(checking if $num was less-than 2). So we wonder: why is 
+[ $num < 2 ] NOT a test? We realize that test's less-than 
+operator is -lt, not <. So the line could be fixed by fixing the
+test. There's any number of ways to do this, such as these:
+if [ $num -lt 2 ] ; then
+if [[ $num < 2 ]] ; then
+We fix that line, run the program again, and note the error about
+line 18 is now gone.
+
+But fixing the line 18 error did not fix the next error. It remains.
+> echo 3 | factorial.sh
+3! = 3*./factorial.sh: line 26: total: command not found
+2*./factorial.sh: line 26: total: command not found
+1 = 1
+>
+So we still get the incorrect output: 3! = 3*2*1 = 1
+AND get an error on line 26. Line 26 is this:
+ total = total * $i
+And the error says 
+  total: command not found
+So this means that when bash got to this line, it tried to run
+A COMMAND NAMED total. (We know we didn't mean that, we meant bash
+to do MATH with the VARIABLE named total.)
+Because bash does not have a command named total, we got an error message.
+Why does bash think total is a command? Why doesn't it understand
+it's supposed to be doing math? First thing we might wonder: did we
+forget to declare total to be an integer? We see that, no, we didn't 
+forget...it was properly declared on line 23, so that's not the issue. 
+So the problem must be with the line itself: total = total * $i
+We run echo 3 | bash -x factorial.sh
+and notice that line 26 expands to:
+  total = total factorial.sh Solution  testFactorial.sh testfiles u5Lab.txt 3
+(At least it expanded to that for prof. Yours may differ).
+But we expected it to be:
+  total = total * 3
+We had expected the * to be MULTIPLY, but bash EXPANDED THE GLOB by
+replacing * with a list of all entries in the current directory.
+Once the replacement was done, bash tried running the command named
+total, and got the error message. Bash treats total as a COMMAND
+because it has whitespace after it. Then you realize that math
+cannot have whitespace, or bash will not recognize it as math.
+So the line:
+     total = total * $i
+could be made correct any number of ways, such as:
+      total=total*$i
+      total=$(( $total * $i ))
+You make the change, run the program with input 3 again and it now 
+produces correct output with no error messages.
+> echo 3 | ./factorial.sh
+3! = 3*2*1 = 6
+>
+
+The next error.
+But you're not done yet. You need to test the program with other input,
+to make sure it works as intended. For example, you need to test it with
+0 and 1 and also with input containing invalid characters.
+You try 0 and 1, and they both work as expected:
+> echo 0 | factorial.sh
+0! = 1
+> echo 1 | factorial.sh
+1! = 1
+>
+When you try invalid input, such as -3  or abc, you expect it to print
+these:
+-3! is undefined
+abc! is undefined
+but it doesn't. It prints wrong things and/or an error message:
+> echo -3 | factorial.sh
+-3! = 1
+> echo abc | factorial.sh
+./factorial.sh: line 18: [: abc: integer expression expected
+abc! = 1 = 1
+>
+You see that for "-3" it enters the true case of the second if-statement, 
+and for "abc" it enters its false case. But both these cases should have 
+entered the true case of the FIRST if-statement:
+  if [ "$(echo $number | grep [^0-9])" ] ; then
+    echo "${num}! is undefined"
+    exit 1
+  fi
+So why isn't that if-statement true for -3? Use bash -x to help figure out
+what's happening.
+>  echo -3 | bash -x factorial.sh
++ read -p 'Enter a number: ' num
+++ echo
+++ grep '[^0-9]'
++ '[' '' ']'
++ '[' -3 -lt 2 ']'
++ echo '-3! = 1'
+-3! = 1
++ exit 0
+>
+Thus, we see that this line:
+  if [ "$(echo $number | grep [^0-9])" ] ; then
+was actually expanded to:
+  if [ '' ]
+So that means grep DIDN't find any invalid characters. Why not? After all,
+the input was -3, which has the invalid character -.
+We know grep is searching the string piped to it by echo. We look at the
+expansion above, and see that the line
+  echo $number
+expanded to
+  echo
+So variable $number is NULL (and not -3 as expected). Why is $number null?
+We look above and realize that the variable we read in was $num, not $number.
+So $number IS null, since it's undefined. We realize we have a typo, and
+used $number where we should have used $num. So this line:
+  if [ "$(echo $number | grep [^0-9])" ] ; then
+is corrected as follows:
+  if [ "$(echo $num | grep [^0-9])" ] ; then
+
+We make the correction and re-run the program. It now works as expected:
+> echo -3 | factorial.sh
+-3! is undefined
+> echo abc | factorial.sh
+abc! is undefined
+>
+
+--------------------
+The fixed program is in Solutions/factorialFixed.sh
+A program named testFactorial.sh runs factorialFixed.sh with various inputs
+so you can verify it works as expected. 
+

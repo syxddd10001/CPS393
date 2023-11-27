@@ -1,0 +1,223 @@
+CPS393 u2Lab:
+   pipes, globs/patterns/etc, shell programs, grep, find, head, tail, cut
+
+-------------------------------------------------------------------------------
+EXAMPLES:
+
+  In the following questions, unless the question states otherwise,
+  the examples assume you are working in YOUR OWN COPY of
+  /usr/courses/cps393/dwoit/labs/u2Lab/testfiles. You can get a copy
+  by doing this, for example:
+  > cd
+  > cd cps393/labs/u2Lab          #created these in u1Lab.txt
+  > cp -a /usr/courses/cps393/dwoit/labs/u2Lab/testfiles .
+
+SHELL PROGRAMS AND NAMES:
+
+   Make a separate shell program to answer each of the questions below. Your programs
+   should be named u2Labqx.sh where x is the 2-digit question number.  e.g., The shell
+   program to answer question 3 below is named: u2Labq03.sh
+
+SHEBANG: 
+ 
+   Remember the first line of each shell program must be (in column 1):
+#!/bin/bash
+
+RUNNING PROGRAMS:
+
+   They must be executable to run. e.g.,
+   > chmod u+x u2Labq01.sh
+   Once a program is executable, you can run it. e.g.,
+   > ./u2Labq01.sh
+
+CREATING PROGRAMS:
+
+   It's not required, but prof suggests you try commands interactively in the 
+   shell first, and when you're happy with them, copy-paste them into a shell 
+   program file.
+   Why? It often takes many attempts to get a command correct, and it wastes
+   a lot of time if you have to keep editing/modifying/saving/running a 
+   program each time.
+   It's faster to use esc-k to recall the command, and then modify it. 
+
+PUTTY COPY-PASTE:
+
+   If you're using putty, remember copy-paste does not use context menus like 
+   other applications. In putty, you "copy" by simply highlight text with your 
+   mouse. Then to "paste" it, right-click. 
+
+PASTING WITH VIM:
+
+   If you're editing with vim, you need to get into insert mode first before
+   you paste. So (type o or i) before you paste. (And if you're using putty,
+   remember paste is right-click.) Then ESC to get out of insert mode.
+
+-------------------------------------------------------------------------------
+
+1. Use ls to list names of entries (files or directories) in the current directory 
+   that START with 'a' or 'b' or 'c' or 'd', and END with 't' or 'a'. 
+   Hint: Use single-character globs [ ]. 
+         The -d option of ls makes it list subdirectory names, not contents.
+
+   When program is run in your testfiles directory, output should be:
+   aa.b.c.d.aa  adirt  cab.bb.txt  dog.txt
+
+2. List names of entries in the current directory that contain ONLY 
+   upper-case letters. Do the listing in such a way that each directory has 
+   a "/" appended to its name.  You MUST use ls piped to grep. 
+   Hint: use an option of ls that appends / to directories. 
+         use a grep command that prints only upper-case items. 
+
+
+   When program is run in your testfiles directory, output should be these 
+   (order and/or line-breaks might differ):
+   BIRD
+   DOG
+   DOGDIR/
+
+3. Write a shell program that takes 3 command line arguments (CLAs):
+   two files and an integer (referred to as File1, File2, and N below).
+
+   If the FIRST N lines of File1 are identical to the LAST N lines of File2,
+   then program prints: 
+   First N lines of File1 and last N lines of File2 are identical
+
+   If the FIRST N lines of File1 and the LAST N lines of File2 differ,
+   then program prints: 
+   First N lines of File1 and last N lines of File2 differ
+
+   Required Algorithm: 
+      use echo to print the first part of the message
+      use head and redirection to copy the first N lines of File1 into a 
+          file named F1
+      use tail and redirection to copy the last N lines of File2 into a
+          file named F2
+      use diff to compare F1 and F2
+      use cut to keep only certain words of diff's output
+      remove temporary files F1 and F2
+
+   Required Program Development:
+      Develop the program by starting with one simple command, making
+      sure it works, and then iteratively refining the program by adding 
+      more commands (and making sure they work with the others) until 
+      the program is complete, as follows:
+
+   3.1. Write a shell program that uses head and redirection to get the
+      first N lines of File1 copied into F1. Remember SHEBANG.
+      Note that File1 and N are $1 and $3 in your program.
+      Test your program works by making a testfile, calling your program
+      with it, and then checking F1 has required lines. e.g., below, we 
+      use file dog1 from the testfiles directory:
+      > cat dog1
+      this is line1
+      of file myFile1
+      and this
+      is line 4
+      and here is 5
+      and this is line 6 
+      > ./u2Labq03.sh dog1 anything 3
+      > cat F1
+      this is line1
+      of file myFile1
+      and this
+      > 
+
+   3.2. Modify the program to use tail and redirection to get the last 
+      N lines of File2 copied into F2.  Note that File2 and N are $2 and $3 
+      in your program. Test your command to make sure it works (check F2 has 
+      last N lines of File2). e.g., using dog2I from testfiles:
+      > cat dog2I
+      here is some first line
+      and another
+      and yet another
+      and one more here
+      this is line1
+      of file myFile1
+      and this
+      > ./u2Labq03.sh dog1 dog2I 3
+      > cat F2
+      this is line1
+      of file myFile1
+      and this
+      >
+
+   3.3. Modify program to use diff to show differences between F1 and F2. 
+
+      Use an option of diff that will report when two files are the same (as 
+      opposed to printing nothing, which is the default). This will cause diff 
+      to print this if F1 and F2 are identical: Files F1 and F2 are identical
+
+      Use an option of diff that gives brief output so that diff only
+      reports that files differ, but does not list each difference (which is
+      the default). This will cause diff to print only this if F1 and F2 differ:
+      Files F1 and F2 differ
+
+      Make sure you just have one diff command in your program, and it uses
+      the two options you found above.
+      Test your program with various inputs in order to trigger different outputs. 
+      e.g., 
+      > ./u2Labq03.sh dog1 dog2I 3
+      Files F1 and F2 are identical
+      > ./u2Labq03.sh dog1 dog2D 3
+      Files F1 and F2 differ
+      >
+
+   3.4. Send diff's output to cut, so that your program only prints the words 
+      "are identical" or "differ". You can do this by using the -d option of 
+      cut to delimit with a space ' ', and then keeping fields 5 and 6 only.
+      Test your program with the files above to make sure it works. e.g.,
+      > ./u2Labq03.sh dog1 dog2I 3
+      are identical
+      > ./u2Labq03.sh dog1 dog2D 3
+      differ
+      >
+
+   3.5. Add an echo command to your program, so that it prints the first 
+      part of the required message (where File1, File2 and N are the CLAs):
+      "First N lines of File1 and last N lines of File2 "
+      Test your program. e.g.,
+      > ./u2Labq03.sh dog1 dog2I 3
+      First 3 lines of dog1 and last 3 lines of dog2I
+      are identical
+      > ./u2Labq03.sh dog1 dog2D 3
+      First 3 lines of dog1 and last 3 lines of dog2D
+      differ
+      >
+
+   3.6. Add an appropriate option to the echo command so that it does
+      not print the trailing newline. And if you didn't already do so, quote 
+      your echo string so that it prints a space at the end.
+      Test your program with various inputs. e.g.,
+      > ./u2Labq03.sh myFile1 myFile2I 3
+      First 3 lines of myFile1 and last 3 lines of myFile2I are identical
+      > ./u2Labq03.sh myFile1 myFile2D 3
+      First 3 lines of myFile1 and last 3 lines of myFile2D differ
+      >
+ 
+   3.7. Modify your program to delete temporary files F1 and F2.
+      Run it and check files were deleted. e.g.,
+      > ./u2Labq03.sh myFile1 myFile2I 2
+      First 2 lines of myFile1 and last 2 lines of myFile2I are identical
+      > ls F1 F2
+      ls: cannot access 'F1': No such file or directory
+      ls: cannot access 'F2': No such file or directory
+      > ./u2Labq03.sh myFile1 myFile2D 2
+      First 2 lines of myFile1 and last 2 lines of myFile2D differ
+      > ls F1 F2
+      ls: cannot access 'F1': No such file or directory
+      ls: cannot access 'F2': No such file or directory
+      >
+
+4. Write a program that uses a find command to list all non-empty files 
+   in the filetree under the current directory. 
+   When program is run in your testfiles directory, output should be:
+   ./out1
+   ./dir1/x
+   ./dog
+   ./dog1
+   ./dog2I
+   ./dog2D
+
+5. Now that you've answered the questions, erase all your answers and
+   re-do the lab.  Wait, what?! 
+

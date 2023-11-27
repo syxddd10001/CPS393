@@ -1,0 +1,10 @@
+#!/bin/bash
+#Source: afuncPgmX
+afunc () {
+   x="def"
+   }
+x="abc"
+afunc | tr -d "a"
+     #or
+     #y=$(afunc) 
+echo $x  

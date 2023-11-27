@@ -1,0 +1,28 @@
+
+The program below is supposed to solve this problem:
+  Write a shell program that takes one or more command line arguments 
+  (CLAs), which are each single characters. ASSUME correct arguments.
+  For each CLA, program prints a line giving the number of entries
+  in the current directory whose name starts with that character. 
+  e.g.,
+> ls
+a abc art dog p p1 p2 p3 p35 petting zoo
+> ./cn a r p d
+a: 3 entries
+r: 0 entries
+p: 6 entries
+d: 1 entries
+>
+
+#!/bin/bash
+for i ; do
+  echo -en "${i}: "
+  echo $(ls -d "${i}*" 2>/dev/null | wc -l) entries
+done
+exit 0
+
+The program does not work because of a problem with the ls line.
+In a file named ans4.txt:
+(a) Briefly and precisely explain the problem.
+(b) Give two different ways you could fix this line.
+

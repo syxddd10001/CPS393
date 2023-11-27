@@ -1,0 +1,2 @@
+#!/bin/bash
+find A2 -type d -name "*D*"

@@ -1,0 +1,7 @@
+/etc/apparmor.d/abstractions/ubuntu-browsers.d/firefox
+/etc/firefox
+/etc/apport/native-origins.d/firefox
+/etc/apport/blacklist.d/firefox
+/class/postgrad/s4patel/.mozilla/firefox
+/class/postgrad/s4patel/firefox
+/class/postgrad/s4patel/firefox/firefox

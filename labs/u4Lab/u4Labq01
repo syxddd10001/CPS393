@@ -1,0 +1,10 @@
+#!/bin/bash
+
+casefold(){
+	if [ "$1" != NULL ] ; then
+		echo "$1" | tr '[:upper:]' '[:lower:]'
+
+	fi
+}
+
+

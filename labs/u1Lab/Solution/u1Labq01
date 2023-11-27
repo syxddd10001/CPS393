@@ -1,0 +1,11 @@
+u1Lab
+vimLab
+#if you used --color=auto the color shown in the shell window
+#will not be shown in this file. 
+#if you used just --color then ls tries to embed display color 
+#codes around directores, and if you cat u1Labq01 it will show in
+#color. If you edit u1Labq01, you will see those codes, but this
+#can look quite ugly. Thus, it's best to use --color-auto if 
+#you're going to redirect the output (as in ls --color-auto >u1Labq01) 
+#and edit u1Labq01, because then your color codes are not stored 
+#inside u1Labq01 and its easier to edit

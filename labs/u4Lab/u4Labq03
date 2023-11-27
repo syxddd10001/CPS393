@@ -1,0 +1,12 @@
+#!/bin/bash
+
+source ./u4Labq01
+source ./u4Labq02
+
+
+title(){
+	for x in $1; do
+		echo -n $(capitalize "$x")" "
+	done	
+}
+

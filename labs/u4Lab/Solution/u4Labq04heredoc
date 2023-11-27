@@ -1,0 +1,66 @@
+#!/bin/bash
+
+#this uses a here document instead of reading test input from
+#file data.csv . But we don't know here documents yet,
+#so after we learn them next week, come back and look
+#at this file then. For now, just look at u4Labq04
+
+
+#bring functions in scope by using "source" (same as ".") 
+#to execute files containing function definitions in current shell 
+source ./u4Labq01
+source ./u4Labq02
+source ./u4Labq03
+
+#runtest prints message saying if test of function $1 with input $2
+#has passed (expected output $3 == actual output $actout)
+#or  failed (expected and actual differ)
+#and updates global variable allpass
+#if prefer printf, uncomment them (and comment echos)
+runtest () {
+  actout="$( $func "$tinput")"   #call given $func with input $tinput
+  tabs 8     #set tabstops for echo statements
+  #if [[ "$3" == "$actout" ]] ; then
+  if [[ "$3" == "$actout" ]] ; then
+    echo -en "Passed" 
+    #printf "Passed "
+  else
+    echo -en "FAILed"
+    #printf "FAILed "
+    allpass=1               #update global variable
+  fi
+  echo -e " test $1\t$2"
+  #printf "test %12s %s\n" "$1" "$2"
+  echo -e "\t\toutput:\t$actout"
+  #printf "%24s %s\n" "   output: " "$actout"
+}
+
+#RUN SOME TESTS
+allpass=0  #0 if all tests pass and 1 if any fail. runtest updates
+echo "---"
+#Uses a here-document to read for each test:
+# name of function to run, its input, its expected output.
+#Assumes comma-separated input, like a csv file, so if input
+# NEEDS a comma in it, must change the IFS below
+#Could put test data into a csv file and do: done <inFile.csv
+#then updating test data would require updating file inFile.csv 
+# only, not updating this file you're looking at now.
+while IFS=, read func tinput expout ; do
+  runtest "${func}" "${tinput}" "${expout}" 
+  echo "---"
+done <<END
+casefold,aBc    DEFhgi  j88Kl-m    Z,abc    defhgi  j88kl-m    z
+casefold,aBcD       87    3   -&@PP ,abcd       87    3   -&@pp 
+capitalize,hI thERE 88evEryon2E,Hi there 88everyon2e
+capitalize,8I   T   Here,8i   t   here
+title, thIS is a TiTle   Example, This Is A Title   Example
+title,hi the 2nd b3b3b3 and 3g3g3g,HI The 2Nd B3B3B3 And 3G3G3G
+END
+
+#PRINT SUMMARY OF RESULTS
+if [ "$allpass" -eq 0 ] ; then echo "ALL TESTS PASSED" 
+else                           echo "SOME TESTS FAILED"
+fi
+echo "---"
+
+exit $allpass

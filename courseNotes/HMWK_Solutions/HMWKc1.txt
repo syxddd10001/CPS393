@@ -1,0 +1,246 @@
+
+HMWK: What is the output of the following program?
+#include <stdio.h>
+int main(void) {
+  printf("*\n**\n");
+  printf("***\n****");
+  printf("\n***");
+  printf("**\n******\n");
+  return 0 ;
+}
+ANSW: 
+cut-and-paste the above into a file named, for example, dog.c
+gcc dog.c
+./a.out
+Then look and see what the output is
+
+
+HMWK:
+Fix the following program so that it does what the comments
+say it will. Note that errors can be BEFORE the line it
+complains about.
+/*Purpose: to calculate the area of a rectangle with
+  given length and width
+  Input: none
+  Output: length, width, and area of rectangle
+*/
+#include <stdio.h>;
+#define LENGTH 36
+#define WIDTH 92
+int main(void);
+  printf("Length: %d, Width: %c, Area: %d\n",
+           LENGTH,WIDTH,LENGTH*WIDTH);
+  return 0;
+}
+
+*/
+ANSW: remove first ; Change second ; to { and %c to %d
+
+/*Purpose: to sum numbers from i to i+3 */
+/*Source: sample3.c*/
+#include <stdio.h>
+int main(void) {
+  int i;   /*starting number */
+  int sum; /*sum of i to i+3 */
+  printf("Enter starting number: ");
+  scanf("%d",&i);
+  sum=0;
+  sum=sum + i++;
+  sum=sum + i++;
+  sum=sum + i++;
+  sum=sum + i;
+  printf("Sum from %d to %d is: %d\n", i-3,i,sum);
+  return 0 ;
+}
+HMWK: re-write the program above that sums the numbers from
+i to (i+3) using only 1 scanf and 2 printf calls, and no
+assignment statements.
+
+#include <stdio.h>
+int main(void) {
+  int i;   /*starting number */
+  printf("Enter starting number: ");
+  scanf("%d",&i);
+  printf("Sum from %d to %d is: %d\n", i,i+3,i+(i+1)+(i+2)+(i+3));
+  return 0 ;
+}
+
+HMWK: A function called "pow" is available in math.h.
+Read about it in man page and use it to write a program
+to do the following:
+/*Purpose: to compute the maximum sized unsigned integer
+             that could be stored in a given number of bits
+  Input: an integer, b, representing a number of bits
+  Output: a line stating the maximum unsigned decimal
+       integer that could be represented with b bits
+  Example: Input: 4
+           Output: Max unsigned decimal int that could be
+                   represented with 4 bits is 15
+*/
+Hint: (2 to the power 4) - 1  is 15
+#include <stdio.h>
+#include <math.h>
+int main (void) {
+  int b;
+  printf("Enter number of bits: ");
+  scanf("%d",&b);
+  printf("Max unsigned decimal int: %lf\n", pow(2,b)-1);
+  return 0;
+}
+
+HMWK:
+Write a function called "me" which takes no arguments and
+has no return value, but has the side-effect of printing
+out your name and address. Test it by calling it in a program.
+
+#include <stdio.h>
+void me (void);
+int main (void) {
+  me();
+  return 0;
+}
+void me (void) {
+  printf("My name\nMy Address\n");
+}
+
+HMWK: here is a file called math2.c which contains functions
+for factorial and fibonacci
+/*Source: math2.c
+  Purpose: source code for factorial and fibonacci functions
+*/
+long fact(long n) {
+  if (n == 0) return(1);
+  else return (n*fact(n-1));
+}
+long fibonacci(long n) {
+  if (n == 0)      return (0);
+  else if (n == 1) return (1);
+  else             return (fibonacci(n-1) + fibonacci(n-2));
+}
+
+HMWK:
+Write file math2.h, a header file for math2.c
+Write a program evaluate.c which prompts the user to
+enter a 0 or a 1. If 0 entered, calculate fact(n) where
+n is prompted for and read in. If 1 entered, calculate
+fibonacci(n), where n is prompted for and read in.
+Make sure your program does error checking on all input.
+Your program should exit with 0 if successful; with 1 if
+user didn't enter a "0 or 1"; and with 2 if the user
+entered an invalid (including negative) value for "n".
+
+//math2.h
+long fact(long n) ;
+long fibonacci(long n) ;
+
+//evaluate.c
+//similar to what was asked, but not exactly
+#include <stdio.h>
+#include <stdlib.h>
+#include "math2.h"
+/*note: this does not have adequate documentation, etc*/
+int main(void) {
+ long Num;
+ int c1,c2,c3;  
+ printf("Enter FAC or FIB (for Factorial or Fibonacci): ");
+ c1=getchar();
+ c2=getchar();
+ c3=getchar();
+ fflush(stdin); /*for the \n*/
+
+ if (!((c1=='F' && c2=='I' && c3=='B')) && !((c1=='F' && c2=='A' &&
+c3=='C')))  
+    {
+     printf("\nBAD INPUT!!\n");
+     exit(1);
+    }
+ printf("Enter a number: ");
+ if ((scanf("%ld",&Num) != 1) || (Num < 0))
+    {
+     printf("\nBAD INPUT!!\n");
+     exit(1);
+    }
+ if (c2=='I') printf("Fibonacci(%ld) is %ld\n",Num,fibonacci(Num));
+ if (c2=='A') printf("Factorial(%ld) is %ld\n",Num,fact(Num));
+ exit(0);
+}
+
+
+
+HMWK: write a program that prints out the extended ASCII
+character set. Use a for loop from 0 to 255, printing the
+index as a char in each loop.
+
+#include <stdio.h>
+int main (void) {
+ int i;
+ for (i=0;i<256;i++) 
+    printf("%c %d\n",i,i);
+ return 0;
+}
+
+HMWK: (1) Write a program which reads in a character, and prints
+whether the character is a vowel or non-vowel. It must work
+for any case, e.g., 'a' and 'A' are both vowels. You should
+not have separate cases for upper and lower case vowels. Do
+this by converting the character to lower case before the
+switch. Use function "tolower" which is in ctype.h (for usage
+see tolower man page.) For non-letter (a-z,A-Z) characters,
+print an appropriate error message. Remember exit codes.
+(2) Modify your program to read in any number of characters
+and report, after each read, whether it is a vowel. You should
+stop processing characters when a '%' is input. You should
+always remind the user that a '%' will stop the program.
+
+ANW:
+(1)
+#include <stdio.h>
+#include <ctype.h>
+int main (void) {
+  char c;
+  printf("Enter a character: "); 
+  c=getchar();
+  c=tolower(c);
+  switch(c) { 
+    case 'a':
+    case 'e':
+    case 'i':
+    case 'o':
+    case 'u':
+      printf("vowel\n");
+      break;
+    default:
+      printf("non-vowel\n");
+  }
+
+  return 0;
+}
+
+(2)
+#include <stdio.h>
+#include <ctype.h>
+int main (void) {
+  char c;
+  printf("Enter a character (%% to stop): "); 
+  while ( (c=getchar()) != '%') {
+   if (c!='\n') {
+     c=tolower(c);
+     switch(c) { 
+         case 'a':
+         case 'e':
+         case 'i':
+         case 'o':
+         case 'u':
+           printf("vowel\n");
+           break;
+         default:
+           printf("non-vowel\n");
+      }
+      printf("Enter a character (%% to stop): "); 
+   }
+  }
+
+  return 0;
+}
+
+

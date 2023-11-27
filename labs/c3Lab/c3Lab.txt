@@ -1,0 +1,88 @@
+CPS393 c3Lab
+
+Passing Pointers to Functions, Command line Processing, File IO, DMA,
+
+-------------------------------------------------------------------------------
+EXAMPLES:
+
+In the following questions, unless the question states otherwise,
+assume correct input (number, format, etc. )
+
+PROGRAM NAMES FOR LAB:
+
+ c3Labq0x.c   where x is the question number
+
+-------------------------------------------------------------------------------
+
+1. Write a program with a main, and a function named readInput.
+   The main function:
+      -declares char c, int i, double d
+      -prints the current values of c, i and d (will be garbage).
+      -passes ADDRESSES of c, i and d to readInput to get the variables
+       populated with values from stdin
+      -prints the current values of c, i and d (will be values read and
+       assigned by readInput)
+   The readInput function:
+      -prompts the user to enter a char, an int, a double and reads them.
+      -appropriately assigns to its arguments so that main's c, i, d are
+       updated.
+   In the following run, output lines 1 and 3 are printed by main, and 
+   line 2 (the prompt) by readInput (which also reads the entered values).
+   >
+   > ./c3Labq01
+   c=K i=22025 d=0.0
+   Enter a char, an int, a double: A 42 67.28
+   c=A i=42 d=67.3
+   >
+
+
+2. Write a program that takes 3 command line arguments, expected to be 
+   a character (delimiter) and 2 filenames.
+   ASSUME correct/valid command line arguments (3 arguments always given, 
+   last 2 arguments are names of readable files).
+
+   Program prints lines of the 2 files on stdout as follows where <delim>
+   is the first command line argument (delimiter character):
+   line 1 of file1<delim>line 1 of file 2
+   line 2 of file1<delim>line 2 of file 2
+   line 3 of file1<delim>line 3 of file 2
+   etc.
+
+   Use getline to read a line from a file (to accommodate lines of any length.)
+   The getline man page contains an example program showing how to use it.
+
+   If one file has less lines, output the null string for missing lines.
+   With valid input, your program produces the same output as the Linux paste 
+   command using the given delimiter. e.g., these produce identical output, 
+   as verified by diff:
+   > ./c3Labq02 X F1 F2 >c2Labq02.out
+   > paste -d X F1 F2 >paste.out
+   > diff c2Labq02.out paste.out
+   >
+
+3. Write a short program that takes an integer, n, and a string, S, as command 
+   line arguments.
+   Program 
+     -uses calloc to allocate memory for a variable, newString, 
+     -populates newString with n copies of S, 
+     -prints newString with a terminal newline.  
+   e.g.,
+   > c3Labq03 4 abc
+   newString=abcabcabcabc
+   >
+
+4. Copy your correct c3Labq02.c (NOT c3Labq03.c!) to c3Labq04.c and modify 
+   the latter so that it produces an error message on stderr if there is 
+   any problem with the command line arguments, and exits appropriately. 
+   If incorrect number of arguments message is: 
+       Usage: ./c3Labq04 character file1 file2
+   If a file not readable for whatever reason message is:
+       ./c3Labq04: file X not readable
+   In the error messages, the program name should not be hardcoded, but should
+   be taken from argv[0].
+   Only one error message is necessary.  
+
+   If a multi-character string is given for first command line argument, this
+   is not an error. Your program simply uses first character as the delimiter 
+   and ignores the rest of the string. 
+

@@ -1,0 +1,34 @@
+#!/bin/bash
+cat $2 | while read line ; do
+  for word in `echo $line` ; do
+     echo $word | grep "^$1"
+  done
+done | wc -w
+
+#or could redirect $2 into loop
+#while read line ; do
+#  for word in `echo $line` ; do
+#     echo $word | grep "^$1"
+#  done
+#done <$2 | wc -w
+
+
+#or could use an explicit counter. 
+#declare -i count=0
+#while read line ; do
+#  for word in `echo $line` ; do
+#    if [ "$(echo $word | grep "^$1")" ] ; then
+#       count=count+1
+#    fi
+#  done
+#done <$2
+#echo $count 
+
+
+#or coud use counter, but instead of <$2 could
+#cat $2 | while read line
+#EXCEPT if do that, need to extend scope of count, as in:
+#cat $2 | ( while read line
+# ...
+# echo $count ) 
+

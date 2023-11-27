@@ -1,0 +1,32 @@
+
+To create dir Inv in home dir:
+> cd
+> mkdir Inv
+
+To create file F could use touch or cat or vim:
+> cd Inv
+> touch F      #creates empty file F
+> #or
+> cat "hi" >F  #creates file F containing this one line
+
+To list entries in Inv and display contents of Inv/F, should
+be able to do these with no error messages given:
+> cd
+> ls Inv
+> cat Inv/F
+
+Permissions needed for user are at least rx on Inv, and r on F
+You can verify this by making perms 
+dr-x------ for Inv 
+-r-------- for F
+Verify you get no error messages when doing these:
+> cd
+> ls Inv
+> cat Inv/F
+
+Then remove user's perms on Inv and F in various combinations and
+see you get error messages when doing the ls and cat again.
+
+As an added point, notice that if you try to delete Inv and/or F,
+you will get error messages because you won't have permissions.
+If you ever want to delete them, you will need to add some w perms. 

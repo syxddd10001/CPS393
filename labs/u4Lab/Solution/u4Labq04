@@ -1,0 +1,52 @@
+#!/bin/bash
+
+#bring functions in scope by using "source" (same as ".") 
+#to execute files containing function definitions in current shell 
+source ./u4Labq01
+source ./u4Labq02
+source ./u4Labq03
+
+#runtest prints message saying if test of function $1 with input $2
+#has passed (expected output $3 == actual output $actout)
+#or  failed (expected and actual differ)
+#and updates global variable allpass
+#if prefer printf, uncomment them (and comment echos)
+runtest () {
+  actout="$( $func "$tinput")"   #call given $func with input $tinput
+  tabs 8     #set tabstops for echo statements
+  #if [[ "$3" == "$actout" ]] ; then
+  if [[ "$3" == "$actout" ]] ; then
+    echo -en "Passed" 
+    #printf "Passed "
+  else
+    echo -en "FAILed"
+    #printf "FAILed "
+    allpass=1               #update global variable
+  fi
+  echo -e " test $1\t$2"
+  #printf "test %12s %s\n" "$1" "$2"
+  echo -e "\t\toutput:\t$actout"
+  #printf "%24s %s\n" "   output: " "$actout"
+}
+
+#RUN SOME TESTS
+allpass=0  #0 if all tests pass and 1 if any fail. runtest updates
+echo "---"
+#Uses a loop to to read for each test:
+# name of function to run, its input, its expected output.
+#Input read from a comma-delimited file data.csv
+#So if input NEEDS a comma in it, must change the IFS below
+#and data.csv appropriately
+#to modify/add/delete tests, just change data.csv
+while IFS=, read func tinput expout ; do
+  runtest "${func}" "${tinput}" "${expout}" 
+  echo "---"
+done <data.csv
+
+#PRINT SUMMARY OF RESULTS
+if [ "$allpass" -eq 0 ] ; then echo "ALL TESTS PASSED" 
+else                           echo "SOME TESTS FAILED"
+fi
+echo "---"
+
+exit $allpass

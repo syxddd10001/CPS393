@@ -1,0 +1,26 @@
+
+You will create 5 files in your test home directory:
+   Ans1, Ans2, Ans3, Ans4, Ans5
+Ans[2-5] are shell programs; ASSUME 
+  -they are always executed from within your test home directory.
+  -they reside in your test home directory (so does Ans1).
+
+In Ans[2-5], include a bash comment line with your
+Full Name, student ID, and CS username. 
+e.g., Prof Woit would include this line:
+#Denise Woit 999999999 dwoit
+DO NOT PUT the comment in line 1 of a bash program!
+
+For what to put in Ans[1-5] see question files PracQuest[1-5]
+
+Answers are worth these marks:
+Ans1: 0 marks but must be correct to get test graded
+Ans2: 2 marks
+Ans3: 3 marks
+Ans4: 2 marks
+Ans5: 3 marks
+
+Although the test will have only 5 questions, more questions
+are provided in this practice directory for more opportunity
+to practice.
+

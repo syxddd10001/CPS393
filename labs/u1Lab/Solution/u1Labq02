@@ -1,0 +1,16 @@
+Did these from within my cps393 directory:
+
+chmod u=rw,g=x,o= labs/u1Lab/myInfo.txt 
+chmod u=rwx,g=rx,o= labs 
+
+But there are many ways to set required permissions.
+For example, 
+  If the permissions on myInfo.txt were originally
+    rwxrw---x then  could have done:
+    chmod u-x,g-rw+x,o-x labs/u1Lab/myInfo.txt
+  If I was already in dir u1Lab, then I could have specified
+    the file by: myInfo.txt instead of labs/u1Lab/myInfo.txt
+
+  Could have used numeric mode:
+    chmod 610 labs/u1Lab/myInfo.txt
+    chmod 750 labs

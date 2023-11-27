@@ -1,0 +1,18 @@
+Create a file named ans1 which contains the SEVEN LINES
+below between "------------------".
+
+Replace each XXXX with the required information. 
+If ans1 is incorrect, your test is ineligible for grading.
+
+------------------
+Last Name:  "XXXX"
+First Name: "XXXX"
+Student ID: "XXXX"
+CS userid:  "XXXX" 
+TMU Email:  "XXXX" 
+Section:    "XXXX"
+TA Name:    "XXXX" 
+------------------
+
+Note: Your TA is one of Jorge, Monty, Akif, Ethan, Murrium
+Note: Name your file ans1  Do not name it Ans1, ans1.c, ans1.sh, etc.

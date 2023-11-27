@@ -1,0 +1,6 @@
+
+In ans3.c, implement a function named mystrcmp, which works like the 
+strcmp function from string.h
+
+Your mystrcmp function must work with the main program given in ans3M.c
+

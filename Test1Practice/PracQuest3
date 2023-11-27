@@ -1,0 +1,13 @@
+Program Ans3 uses a single chmod command to set permissions of 
+all entries in directory D3 (from the filetree of PracQuest2) 
+whose name contains at least one digit directly after a . (dot),
+so that user (owner) is exactly rw-, group is exactly r--, and 
+other is exactly --x. 
+
+Your chmod command must specify the entries using an ABSOLUTE 
+path name and apprpriate GLOB constructs.
+
+Your chmod command must always work, even if entries in D3 
+change later, for example to: abc def.77 x.y x.2y
+
+Ans3 should NOT rely on the entries' starting permissions.

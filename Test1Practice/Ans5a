@@ -1,0 +1,16 @@
+#!/bin/bash
+#prints on stdout the prime factors of $1
+#must use factor to get them.
+#1 has no prime factors, so nothing to stdout
+#
+#one approach
+for i ; do
+  factor $i | sed -e "s/^/Prime Factors of /"
+done
+
+#another approach
+#for i ; do
+#  echo -n "Prime Factors of "
+#  echo "`factor $i`"
+#done
+

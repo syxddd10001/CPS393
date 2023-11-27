@@ -1,0 +1,2 @@
+#!/bin/bash
+cat $2 | tr -s " " "\n" | grep "^$1" | wc -l

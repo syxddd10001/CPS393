@@ -1,0 +1,21 @@
+Answers to question 5 in Part 1:
+
+You can find the answers by doing "man ls" and then searching
+n the man page for / 
+Remember you search string "string" by typing /string
+so in order to search for a / you need to do:
+//
+so that you search for a /
+Then you can type n to get the next occurence (or // again)
+
+Either of these to get color 
+ls --color=auto   
+ls --color
+
+Either of these to get / appended to directories
+ls -p  #the best one, since it ONLY appends / to directories
+ls -F  #it appends / to dirs, but also other characters, e.g., 
+       #appends * to executable files.
+ls --file-type #is like -F except doesn't append any * characters
+
+

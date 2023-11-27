@@ -1,0 +1,34 @@
+#!/bin/bash
+#Program Ans2 creates this filetree under ~
+#Assume Ans2 exists in, and run from ~
+#
+#                        A2/
+#                         |
+#         ----------------------------------
+#         |             |       |    |     |
+#        D1/           D2/     f1   f2     D3/
+#         |             |                  |
+#       -----        -------     ---------------------
+#       |   |        |     |     |       |     |     |
+#      f3  f4       D4/   f5    ab1.c  f2.2  hi.67  x123
+#                    |
+#              ---------
+#              |   |   |
+#             f6  f7  g2
+#
+#LOTS of possible approaches to answer this...
+#one approach:
+mkdir A2 ; cd A2 ; mkdir D1 D2 D3 ; touch f1 f2
+cd D1 ; touch f3 f4 ; 
+cd ../D2 ; touch f5 ; mkdir D4 ; 
+cd D4 ; touch f6 f7 g2
+cd ../../D3 ; touch ab1.c f2.2 hi.67 x123
+
+#one approach:
+#mkdir A2 A2/D1 A2/D2 A2/D3 A2/D2/D4
+#touch A2/f1 A2/f2 A2/D1/f3 A2/D1/f4 A2/D2/f5 A2/D2/D4/f6 A2/D2/D4/f7 A2/D2/D4/g2 A2/D3/ab1.c A2/D3/f2.2 A2/D3/hi.67 A2/D3/x123
+
+
+#there are many other ways to create files besides touch, such as: 
+#cp, vim, redirection from a command such as cat, etc.
+

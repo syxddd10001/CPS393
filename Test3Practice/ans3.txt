@@ -1,0 +1,15 @@
+a) find / -name "a*" 2>/dev/null &
+Explanation: add an '&' at the end of the original command
+
+b) > jobs  		# to find the PID of the process
+Then
+> kill %PID 		# where "%PID" is %1, %2 ... %k
+
+e.g we find PID from jobs is 2, we do:
+> kill %2
+
+
+
+
+
+

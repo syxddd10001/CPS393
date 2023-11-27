@@ -1,0 +1,32 @@
+#!/bin/bash
+#Source: countod
+#read in a number of strings from user (until
+#user enters  END  or end) and output the total
+#number of strings that are  files  & the total
+#number that are directories.
+#note: if the use enters more than one string on a line,
+# will get if [ -f str1 str2 etc ] which is interpretted as
+#          if [ -f str1 ]  (Thats just how test works)
+
+typeset -i  ordfile=0
+typeset -i  dirfile=0
+
+while  [ true ]
+do
+     echo  Enter a file name or  END to quit
+     read filenam
+     if  [ "$filenam" = "END" -o "$filenam" = "end" ]
+     then
+          break
+     fi
+     if   [ -f  "$filenam" ]
+     then
+          ordfile=ordfile+1
+     elif  [ -d "$filenam" ]
+     then
+          dirfile=dirfile+1
+     fi
+done
+echo -e "The number of ordinary files:\t  $ordfile"
+echo -e "The number of directories:\t  $dirfile"
+exit 0

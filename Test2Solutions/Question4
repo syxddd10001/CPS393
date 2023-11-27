@@ -1,0 +1,31 @@
+
+Write a program named ans4.c that takes 1 command line argument, 
+expected to be the name of a readable file. 
+Your program prints the file in reverse order like the linux tac
+command.  e.g.,
+> cat f4
+line 1
+line 2
+line 3
+> tac f4
+line 3
+line 2
+line 1
+>
+
+Your program (main function) must use this algorithm:
+ 1. call function fileSize to obtain, for the file named fname:
+      -the length of the longest line in fname, and 
+      -the number of lines in fname. 
+    fileSize must open the file, and close it before returning.
+    fileSize's protorype is:
+    void fileSize (char *fname, int *longestLine, int *numLines ) ;
+
+ 2. allocate an array large enough so that each array row can hold 
+    one line of the file.
+
+ 3. open the file, read each line into a row of the array, close the file.
+
+ 4. print rows of the array in reverse order, so that the program prints 
+   the lines of the file in reverse order, like Linux tac. 
+

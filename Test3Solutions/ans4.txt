@@ -1,0 +1,18 @@
+
+(a) The quotes on "${i}*" pass a literal * to ls, so this asks ls 
+    to list an entry literally named, say, 'a*' instead of entries
+    whose name starts with a
+(b) Fix 1. remove the quotes. 
+    Fix 2. put eval before ls
+
+
+
+Explanation (not required for your answers. Just FYI):
+
+Fix 1. remove the quotes.
+  With quotes removed, bash expands a* first to a list of all of entries 
+  whose name starts with a, then passes those names to ls to list.
+Fix 2. put eval before ls
+  eval's first pass substitutes ${i}, giving: ls -d a*
+  then eval would execute the resulting command, and bash would expand
+  a* as above before sending the resulting list to ls.

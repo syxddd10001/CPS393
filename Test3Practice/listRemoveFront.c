@@ -9,8 +9,9 @@ int listRemoveFront(NodeType **List, char *C){
 	
 	else {	
 		*C = (*List)->ch;
+		NodeType* tmp = *List;
 		*List = (*List)->next;
-		
+		free(tmp);
 		return 1;
 	}	
 }

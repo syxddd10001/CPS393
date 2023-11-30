@@ -1,6 +1,0 @@
-++ echo aaa
-++ cut -c1-8
-+ trunc=aaa
-++ grep aaa gfile
-+ '[' aaaaaaaabbbb ']'
-+ echo Found

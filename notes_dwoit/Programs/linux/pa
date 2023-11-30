@@ -1,6 +1,0 @@
-#!/bin/bash
-#source: prnargs 
-#shell pgm to print out its first 2 args
-echo -e "arg1: \t\t $1"
-echo -e "arg2 is: \t $2"
-exit 0  

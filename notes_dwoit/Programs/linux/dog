@@ -1,7 +1,0 @@
-#!/bin/bash
-ls f*
-echo this is the dog file
-echo this is arg1: $1
-echo this is arg2: $2
-echo there are $# args
-exit 0

@@ -1,4 +1,0 @@
-#!/bin/bash
-make mykennel 
-chmod go=rx mykennel
-./mykennel <dogDatabase

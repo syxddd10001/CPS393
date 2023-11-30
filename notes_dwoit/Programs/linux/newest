@@ -1,5 +1,0 @@
-#!/bin/bash
-ls -lt >tempfile
-head -$1 tempfile
-rm tempfile
-exit 0

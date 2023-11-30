@@ -1,0 +1,9 @@
+#!/bin/bash
+#source cla
+#program to print out all command line args one at a time
+for i in "$@"
+do
+   echo $i
+done
+exit 0
+

@@ -1,0 +1,15 @@
+#!/bin/bash
+# Source: add:
+# adds : to front of each line of several files & concatenates
+# result into bigfile
+
+for  file  in  fn?                 #<--  fn1, fn2 fny  etc
+do
+     cat  $file |  \
+     while  read line              #<--  reads line 1 of stdin
+                                   #     into  var  line
+     do
+          echo  ":$line"
+     done | cat >>  big-file       #%%need >> or last file will clobber
+done
+exit 0

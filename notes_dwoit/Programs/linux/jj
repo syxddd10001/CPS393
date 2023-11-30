@@ -1,0 +1,10 @@
+#!/bin/bash
+ff () {
+   x="def"
+   echo in ff: dollar_1 is:$1
+   }
+x="abc"
+ff op
+echo $x    #will print def
+echo in main: dollar_1 is:$1
+

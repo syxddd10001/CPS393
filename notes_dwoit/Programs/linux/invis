@@ -1,0 +1,4 @@
+#!/bin/bash
+chmod o= $1
+ls -l $1
+exit 0

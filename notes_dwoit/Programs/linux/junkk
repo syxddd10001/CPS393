@@ -1,0 +1,9 @@
+#!/bin/bash
+#Source: list10
+x=1
+while  [ $x  -le  10 ]         # or while test $x -le 10
+do
+     echo  $x
+     x=`expr  $x + 1`
+done
+exit 0

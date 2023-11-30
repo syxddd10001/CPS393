@@ -1,0 +1,125 @@
+
+HMWK: Rewrite the above programs using typedefs
+for complex numbers.
+
+/*Source: struct6T.c*/
+/* answering HMWK quesion */
+#include <stdio.h>
+typedef struct {
+                 int r;
+                 int i;
+       }complex;
+complex ReadIt(void);
+
+int main(void) {
+  complex X;
+  X=ReadIt();
+  printf("%d + %di\n",X.r, X.i);
+  return 1;
+}
+complex ReadIt() {
+  complex temp;
+  scanf("%d %d", &temp.r, &temp.i);
+  return(temp);
+}
+
+HMWK: Put functions WriteSum and MakeComplex,
+(along with anything else necessary)
+into a file called cmplx.c that can be compiled
+separately. Write a header file cmplx.h
+A program similar to this should then work.
+Compile it with cmplx.c and run it.
+
+
+/*Source: cmplx.h*/
+/* answering HMWK question */
+typedef struct {
+                 int r;
+                 int i;
+       }complex; 
+complex ReadIt(void);
+complex MakeComplex(int x, int y);
+void WriteSum(complex c1, complex c2);
+
+
+/*Source: cmplx.c*/
+/* answering HMWK quesion */
+#include <stdio.h>
+#include "cmplx.h"
+
+complex MakeComplex( int x, int y) {
+  complex temp;
+  temp.r=x; temp.i=y;
+  return(temp);
+}
+
+complex ReadIt() {
+  complex temp;
+  scanf("%d %d", &temp.r, &temp.i);
+  return(temp);
+}
+
+void WriteSum(complex c1, complex c2) {
+     printf("%d + %di\n", (c1.r)+(c2.r), (c1.i)+(c2.i));
+}
+
+HMWK: rewrite the above program using typedefs for
+complex.
+Write ConjugateComplex which turns a complex number
+into its conjugate (imaginary part multiplied by -1).
+
+Write a function called NegComplex turns a complex number
+into its negative (both imaginary and real parts multiplied
+by -1.
+
+#include <stdio.h>
+typedef struct {
+                 int r;
+                 int i;
+       }complex;
+void ScalarMult(int i, complex *p);
+void PrintComplex(complex *p);
+void ConjugateComplex(complex *p) ;
+void NegComplex(complex *p) ;
+
+int main(void) {
+  complex C={4,-2};
+  printf("complex number is: ");
+  PrintComplex(&C); putchar('\n');
+  ScalarMult(3,&C);
+  printf("after ScalarMult by 3, complex number is: ");
+  PrintComplex(&C); putchar('\n');
+  ConjugateComplex(&C);
+  printf("after ConjugateComplex, complex number is: ");
+  PrintComplex(&C); putchar('\n');
+  NegComplex(&C);
+  printf("after NegComplex, complex number is: ");
+  PrintComplex(&C); putchar('\n');
+  return 0;
+}
+void ScalarMult(int m, complex *p) {
+//pointer is required since mutating p
+  p->r = p->r * m;
+  p->i = p->i * m;
+}
+
+void PrintComplex(complex *c){
+//pointer unnecessary since not mutating p
+     //printf("%d + %di\n", c->r, c->i);
+     printf("%d + %di\n", (*c).r, (*c).i);
+}
+
+void ConjugateComplex(complex *p) {
+  p->i = p->i * -1;
+}
+void NegComplex(complex *p) {
+  ScalarMult(-1,p);
+}
+
+Q: Why use tmp in first loop? Why not just use p?
+A: Because will lose array (by end of loop, p will point past end 
+   of array), so can't print array afterward. If WANTED to use p, 
+   then could just subtract n integers worth of storage from p
+   before printing, but that's not very intuitive.
+
+

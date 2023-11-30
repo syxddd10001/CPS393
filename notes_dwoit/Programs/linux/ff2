@@ -1,0 +1,10 @@
+#!/bin/bash
+#source ff2
+#passes quotes to grep so works even if $1 has spaces
+#and even if $1 is not set
+if [ "`grep \"$1\" file1`" ]
+then
+   echo string $1 is contained in file file1
+else
+   echo string $1 is not contained in file file1
+fi

@@ -1,0 +1,6 @@
+#!/bin/bash
+rev="" 
+for i ; do
+  rev="$i $rev"
+done
+echo $rev

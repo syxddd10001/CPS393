@@ -1,0 +1,4 @@
+#!/bin/bash
+#name etc
+who | grep $1 | cut -c1-8 | uniq
+

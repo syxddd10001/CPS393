@@ -1,0 +1,11 @@
+#Source: profgone
+# prints "still here" until prof logs off
+
+while  [ "`who | grep asadeghi`" ]     #backquotes to  evaluate
+                                   #false when null string
+do
+     echo "he's still here"
+     sleep  2                     #2 seconds
+done
+echo  "he's finally gone"         #run in background
+exit 0

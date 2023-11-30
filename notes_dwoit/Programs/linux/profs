@@ -1,0 +1,9 @@
+#!/bin/bash
+#source profs
+#prints names of profs logged in
+who | grep dwoit | cut -c1-8 | uniq
+who | grep eharley | cut -c1-8 | uniq
+who | grep aabhari | cut -c1-8 | uniq
+who | grep -w mes | cut -c1-8 | uniq #string in lots of other userids
+exit 0
+#or who | grep -Ew "dwoit|eharley|mes" | cut -c1-8 | sort -u

@@ -1,0 +1,17 @@
+#!/bin/bash
+#Source: ison
+#tells if one pal logged in
+if  [ $#  -eq  0 ]
+then                     # no userid supplied
+     echo   -e "Enter User: \c "
+     read user
+else
+     user=$1
+fi
+if  [  "`who  | grep  $user`"  != "" ]  # or [ ! "`who | grep $user`" ]
+then
+     echo  "Yes"
+else
+     echo  "No"
+fi
+exit 0

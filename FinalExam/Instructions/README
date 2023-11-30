@@ -1,0 +1,14 @@
+Identification as per Test3 (Question1, ans1Template and ans1)
+On the real Exam:
+  -all questions and your answers are in the test home directory
+  -questions are named Question1, Question2, ... as usual 
+  -your answers are named ans1, ans*.sh, ans*.c as usual
+  -if you accidentally delete a given file, you can get a backup
+   copy from directory test_orig/ in your home directory.
+
+However, for this Practice Exam: 
+  -Questions are divided into subdirectories C/ Linux/
+  -Question numbers start at 1 for C and 10 for Linux (but on
+   the real Exam, Question1 is the identification question, and
+   subsequent questions continue from Question2, as usual).
+

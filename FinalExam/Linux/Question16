@@ -1,0 +1,22 @@
+
+Answer file: ans16.sh
+
+Program prints words of stdin that start with $1, in any case. 
+e.g.,
+> cat que16.in
+This file has these kinds of th things
+in it. There are man more nothings in zth 
+hereth this is another line that th is
+at the thinggie This
+no no no not here not again
+this is th.
+> ./ba1.sh thi <que16.in
+This
+things
+this
+thinggie
+This
+this
+> ba1.sh tHI <que16.in
+> #same output as above
+

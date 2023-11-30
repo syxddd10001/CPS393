@@ -1,0 +1,24 @@
+
+Answer file: ans7.c
+
+main reads 2 strings from stdin into X and Y, then calls function 
+swap_string to swap strings X and Y WITHOUT moving their individual 
+characters in memory. Assume X and Y have at at most 10 characters,
+and contain no whitespace characters.
+
+main must be:
+
+int main (void) {
+ char *X=malloc(11), *Y=malloc(11);
+ scanf("%s %s",X,Y);
+ printf("X:%s, ", X); printf("Y: %s\n", Y);
+ swap_string(&X, &Y);
+ printf("X:%s, ", X); printf("Y: %s\n", Y);
+ return 0;
+}
+
+Example of running program:
+> echo "abcdefgh 1234" | a.out
+X:abcdefgh, Y: 1234
+X:1234, Y: abcdefgh
+> 

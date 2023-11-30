@@ -1,0 +1,11 @@
+
+Answer file: ans6.c
+
+Program prints the number of 'X' characters
+in files F1, F2 and E1.
+
+Using given que6.inF1, que6.inF2, que6.inE1, program outputs:
+que6.inF1: 9 X characters
+que6.inF2: 0 X characters
+que6.inE1: 0 X characters
+

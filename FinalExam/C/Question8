@@ -1,0 +1,20 @@
+
+Answer file: ans8.c
+
+Files que8.c and que8.h provide an abstraction for complex numbers.
+File  que8M.c contains a main function that creates a complex
+number and prints it.
+
+Copy que8.c to ans8.c and replace XXXXXXX with code so the program 
+produces output:
+-4+7i
+
+The abstraction for complex numbers is now in ans8.c and que8.h, so
+your final program is compiled as follows: gcc que8M.c ans8.c
+
+IMPORTANT: Replace only XXXXXXX in ans8.c; do not modify any other
+parts of it, or this question's mark must be zero, since you won't
+have answered the question asked. No special consideration will be
+given. Final warning.
+You can verify nothing else was modified by doing:
+> diff que8.c ans8.c

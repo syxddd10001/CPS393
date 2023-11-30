@@ -1,0 +1,16 @@
+
+Answer file: ans13.sh
+
+Program prints YES if its last command line argument (CLA) starts 
+with a digit, and NO otherwise.
+It must accomplish this by shifting the last CLA into $1 and
+then checking what $1 starts with.
+
+> ./ans13.sh ab c 87 22 09 118
+YES
+> ./ans13.sh 871 bc  a118
+NO
+> 
+
+Hint: $# gives the number of CLAs
+      $(( )) does math

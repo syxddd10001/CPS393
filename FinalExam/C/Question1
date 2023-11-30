@@ -1,0 +1,20 @@
+
+Answer file: ans1.c
+
+main calls a variable-argument function, foo. 
+Function foo's first argument specifies the number and type of the 
+optional arguments, which must be strings or ints, indicated by 
+s and d respectively. foo prints each optional argument on its own
+line, preceded by "string" or "int" appropriately.
+
+main must be exactly:
+
+int main (void) {
+  foo("dsds",5,"some string",4,"another string");
+}
+
+The program produces this expected output: 
+int: 5
+string: some string
+int: 4
+string: another string

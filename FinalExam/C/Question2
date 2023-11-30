@@ -1,0 +1,17 @@
+
+Answer file: ans2.c
+
+Besides main, program contains 3 functions: add, mul, apply.
+Function add takes 2 double arguments and returns their sum.
+Function mul takes 2 double arguments and returns their product.
+Function apply 
+  -takes 3 arguments: a function pointer and 2 doubles
+  -returns the result of calling the given function with the 
+   given arguments.
+
+main calculates 3.0 * ( 1.2 + 2.1) using one statement containing
+appropriate nested calls to apply.
+
+The completed program produces this expected output: 
+9.9
+

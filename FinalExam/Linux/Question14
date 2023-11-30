@@ -1,0 +1,24 @@
+
+Answer file: ans14.sh
+
+Program prints YES if lines $1 and $2 of file $3 are identical, and 
+NO otherwise. Program MUST define and use a function that takes 2
+arguments, and prints line $1 of file $2 on stdout.
+
+e.g.,
+> cat que14.in
+line 1
+line 2
+line 3
+line 4
+line 5
+line 2
+line 7
+> ./ans14.sh 2 3 que14.in
+NO
+> ./ans14.sh 2 6 que14.in
+YES
+> ./ans14.sh 2 2 que14.in
+YES
+> 
+

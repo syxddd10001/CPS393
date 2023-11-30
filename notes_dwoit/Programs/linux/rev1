@@ -1,8 +1,0 @@
-#!/bin/bash
-typeset -i i
-i=$#
-while [ $i -ge 1 ] ; do
-  a='$'$i
-  eval "echo $a"
-  i=i-1
-done

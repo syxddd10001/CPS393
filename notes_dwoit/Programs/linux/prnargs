@@ -1,7 +1,0 @@
-#!/bin/bash
-#source: prnargs 
-#shell pgm to print out its first 2 args
-echo The first argument is:  $1
-echo The second argument is: $2
-echo dollar zero is: $0
-exit 0  

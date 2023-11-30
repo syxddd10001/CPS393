@@ -1,0 +1,285 @@
+HMWK:
+1. write a shell program called clean that removes all files called
+"core" from your directory structure, and then removes all files that
+have size 0 (0 bytes) from your dir structure. That's your WHOLE
+dir structure, not just the current dir.
+(note: "find" can find files that are zero bytes long)
+
+
+#!/bin/bash
+find ~/. -name "core" -type f 2>/dev/null | xargs rm
+find ~/. -empty -type f 2>/dev/null       | xargs rm
+
+
+HMWK:
+1.write a shell program called avgs which will read lines from
+  stdin such as the following (where the dots indicate more lines
+  of the same kind:
+  SID        LNAME    I  T1/20  T2/30
+  92876035   WANG     S  15     26
+  95908659   CHIANG   R  10     29
+     .         .      .   .      .
+     .         .      .   .      .
+     .         .      .   .      .
+  91234987   MYRTH    R  15     16
+
+  Your shell program will print out a line such as:
+  Average of T1/20 is 17   and of T2/30 is 24
+  where 17 and 24 are the averages of the last 2 columns
+  respectively. Note that your program must keep a total
+  and count for each of the last 2 columns, and must not
+  include data from the first line in the totals and counts.
+
+
+ANSW:
+
+#!/bin/bash
+typeset -i totT1=0
+typeset -i totT2=0
+typeset -i totLines=0
+
+read sid lname i T1title T2title rest  #first line
+
+while read sid lname i T1 T2 rest ; do
+  totT1=totT1+$T1
+  totT2=totT2+$T2
+  totLines=totLines+1
+done
+
+echo "Average of T1/`echo $T1title | cut -d/ -f2` is
+$(($totT1/$totLines))"
+echo "Average of T2/`echo $T2title | cut -d/ -f2` is
+$(($totT2/$totLines))"
+echo "  Note:"
+echo "  totT1: $totT1"
+echo "  totT2: $totT2"
+echo "  totLines: $totLines"
+
+2. Modify avgs so that the "title" line, e.g.,
+  SID        LNAME    I  T1/20  T2/30
+  above, could be located at ANY LINE of stdin (ie., not
+  necessarily the FIRST line, as above.)
+
+ANSW:
+#!/bin/bash
+typeset -i totT1=0
+typeset -i totT2=0
+typeset -i totLines=0
+
+while read sid lname i T1 T2 rest ; do
+  if [ "$sid" = "SID" ] ; then
+     T1title=$T1
+     T2title=$T2
+  else
+     totT1=totT1+$T1
+     totT2=totT2+$T2
+     totLines=totLines+1
+  fi
+done
+
+echo "Average of T1/`echo $T1title | cut -d/ -f2` is
+$(($totT1/$totLines))"
+echo "Average of T2/`echo $T2title | cut -d/ -f2` is
+$(($totT2/$totLines))"
+
+
+3. Modify avgs so that the highest and lowest marks are
+  printed for each of T1 and T2, as well as averages.
+  Your program should produce output such as the following:
+  T1/20: Average: 17   Hightest: 19  Lowest: 1
+  T2/30: Average: 24   Hightest: 29  Lowest: 9
+
+ANSW:
+#!/bin/bash
+typeset -i totT1=0
+typeset -i totT2=0
+typeset -i totLines=0
+typeset -i highestT1=0
+typeset -i highestT2=0
+typeset -i lowestT1=0
+typeset -i lowestT2=0
+firstDataLine="YES"
+
+while read sid lname i T1 T2 rest ; do
+  if [ "$sid" = "SID" ] ; then
+       T1title=$T1
+       T2title=$T2
+  else
+        if [ "$firstDataLine" = "YES" ] ; then
+            highestT1=T1 ; lowestT1=T1
+            highestT2=T2 ; lowestT2=T2
+            firstDataLine="NO"
+        fi
+        totT1=totT1+$T1
+        totT2=totT2+$T2
+        totLines=totLines+1
+        if [ "$T1" -gt "$highestT1" ] ; then
+           highestT1=T1
+        fi
+           if [ "$T2" -gt "$highestT2" ] ; then
+           highestT2=T2
+        fi
+        if [ "$T1" -lt "$lowestT1" ] ; then
+           lowestT1=T1
+        fi
+        if [ "$T2" -lt "$lowestT2" ] ; then
+           lowestT2=T2
+        fi
+  fi
+done
+
+echo "T1/`echo $T1title | cut -d/ -f2` Average: $(($totT1/$totLines))  Highest: $highestT1 Lowest: $lowestT1"
+echo "T2/`echo $T2title | cut -d/ -f2` Average: $(($totT2/$totLines))  Highest: $highestT2 Lowest: $lowestT2"
+
+
+4. Modify avgs so that the output above is in PERCENT, e.g.,
+  T1/20: Average: 85%   Hightest: 95%  Lowest: 5%
+  T2/30: Average: 80%   Hightest: 96%  Lowest: 3%
+  If variable x contains "T1/20" you could use an echo piped to
+  a cut, and assign the result to another variable, or you
+  could use ${x#*/} which will match pattern "*/" against the
+  beginning of the contents of x, delete the shortest part that
+  matches, and return the rest.  Thus declare -i y=${x#*/} would
+  assign 20 to y. Note that pattern */ means anything followed by
+  a "/"
+
+ANSW:
+
+#!/bin/bash
+typeset -i totT1=0
+typeset -i totT2=0
+typeset -i totLines=0
+typeset -i highestT1=0
+typeset -i highestT2=0
+typeset -i lowestT1=0
+typeset -i lowestT2=0
+firstDataLine="YES"
+
+while read sid lname i T1 T2 rest ; do
+  if [ "$sid" = "SID" ] ; then
+     T1title=$T1
+     T2title=$T2
+  else
+      if [ "$firstDataLine" = "YES" ] ; then
+          highestT1=T1 ; lowestT1=T1
+          highestT2=T2 ; lowestT2=T2
+        firstDataLine="NO"
+      fi
+        totT1=totT1+$T1
+        totT2=totT2+$T2
+        totLines=totLines+1
+        if [ "$T1" -gt "$highestT1" ] ; then
+           highestT1=T1
+        fi
+        if [ "$T2" -gt "$highestT2" ] ; then
+           highestT2=T2
+        fi
+        if [ "$T1" -lt "$lowestT1" ] ; then
+           lowestT1=T1
+        fi
+        if [ "$T2" -lt "$lowestT2" ] ; then
+           lowestT2=T2
+        fi
+  fi
+done
+
+
+typeset -i T1outof="`echo $T1title | cut -d/ -f2`"
+typeset -i T2outof="`echo $T2title | cut -d/ -f2`"
+
+echo "T1/$T1outof Average: $(($totT1/$totLines*100/$T1outof))  Highest: $(($highestT1*100/$T1outof)) Lowest: $(($lowestT1*100/$T1outof))"
+echo "T2/$T2outof Average: $(($totT2/$totLines*100/$T2outof))  Highest: $(($highestT2*100/$T2outof)) Lowest: $(($lowestT2*100/$T2outof))"
+
+5. Write a shell program called findext which will list directories
+  under a given path that contain files/dirs having the given extensions.
+  Program findext takes at least 2 command line arguments. Its usage is:
+  findext path ext1 ext2 ...
+  where "path" is the path to the start of the directory structure
+  you wish to search, and ext1, ext2, etc are extensions.
+  Program findext will print out the directories under path which
+  contain files/dirs that end in .ext1 .ext2  etc
+  Your program does not need to work properly if the user passes glob
+  constructs or special chars as arguments.
+  For example:
+  findext /home/dwoit/courses c scm
+  will list all directories under /home/dwoit/courses that contain
+  files/dirs named *.c and/or *.scm
+
+  If findext is sent less than 2 command line args, it should print
+  on stderr
+    Usage: findext path arg1 arg2
+  and exit with exitcode 1
+  (the word findext above should be printed using $0)
+  If it is passed 2 or more arguments, it should print a list of dirs
+  in which files/dirs of the form *.ext1 *.ext2 etc reside. Then it
+  should exit with exitcode 0.
+  Note that only the DIRECTORY names are printed. Therefore you will
+  have to chop off the trailing file/dir name (the part after the last "/")
+  You can do this with ${var%/*} which says to match pattern "/*" (slash
+  followed by anything) at the END of variable var; and delete the shortest
+  part that matches and return the rest. You will also find utilities
+  sort and uniq useful.
+
+ANSW:
+#!/bin/bash  
+if [[ $# -lt 2 ]]
+then
+   echo " Usage: $0 path arg1 arg2 ..." >/dev/stderr
+   exit 1
+fi
+start=$1
+shift
+for ext 
+do
+  #find $start -name "*.$ext" -print -follow 2>/dev/null
+  find $start -name "*.$ext" -print  2>/dev/null
+done  | \
+while read thepath
+do
+ echo ${thepath%/*}  #match pattern "/*" (slash followed by
+#                    #anything) at end of variable thepath
+#                    #delete the shortest part that matches
+#                    #and return the rest
+done | sort | uniq
+exit 0
+
+HMWK: use eval to write a shell program called revargs which will
+print out its command line args in reverse order. 
+White-space preservation not necessary.
+Write a shell program the doesn't use eval to print its command
+line args in reverse order.
+
+ANSW:
+
+#!/bin/bash
+typeset -i x=$#
+while [[ $x -gt 0 ]] ; do
+  y="\$$x"
+  eval "echo $y"
+  x=x-1
+done
+
+#!/bin/bash
+typeset -i x=$#
+while [[ $x -gt 0 ]] ; do
+  eval "echo \$$x"
+  #eval echo '$'$x   #even this works 
+  x=x-1
+done
+
+
+#!/bin/bash
+#preserves whitespace in CLAs
+for y ; do
+ echo "$y"
+done | tac 
+
+
+#!/bin/bash
+#preserves whitespace in CLAs
+rev=""
+for i ; do
+  rev="$i $rev"
+done
+echo "$rev"
+

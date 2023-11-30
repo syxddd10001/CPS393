@@ -1,0 +1,27 @@
+#!/bin/bash
+#program to echo out dirs in the given dir structure that
+#contain filenames with given extensions. The dir and the 
+#extensions are passed as command line args
+#Usage: findext dir ext1 ext2
+#e.g., findext /home/dwoit c jav
+#      findext dog x
+#Note: glob constructs cannot be included in args
+
+if [ $# -lt 2 ]
+then
+  echo Usage: $0 path arg1 arg2 ... >/dev/stderr
+  exit 1
+fi
+start=$1
+shift
+for ext
+do
+  find $start -name "*.$ext" 2>/dev/null
+done | \
+  while read thepath
+  do
+     #echo ${thepath}  #whole path and filename
+     echo ${thepath%/*} #just path (no filename)
+     #basename ${thepath} #just filename
+  done | sort | uniq
+exit 0

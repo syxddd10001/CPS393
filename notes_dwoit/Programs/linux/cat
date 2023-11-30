@@ -1,0 +1,3 @@
+#!/bin/bash
+echo this is cat and this is $1
+

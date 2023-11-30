@@ -1,0 +1,122 @@
+https://www.quora.com/Which-programming-language-is-Linux-written-in
+By Mcleodproducts:
+Linux is an open-source operating system that was initially
+developed by Linus Torvalds in 1991. It is one of the most
+widely-used operating systems in the world and is known for
+its stability, security, and flexibility. Linux is written
+primarily in the C programming language, although other
+languages such as assembly language, Perl, Python, and Bash
+are also used. In this article, we will explore the reasons
+why C is the primary language used in the development of
+Linux.
+
+C is a high-level programming language that is widely used in
+the development of operating systems, system software, and
+applications. It was developed in the early 1970s by Dennis
+Ritchie at Bell Labs as a successor to the B programming
+language. C was designed to be a simple, efficient, and
+portable language that could be used to write low-level system
+code as well as higher-level applications.
+
+One of the main reasons why C is the primary language used in
+the development of Linux is its efficiency and performance. C
+is a compiled language, which means that the code is
+translated into machine language before it is executed. This
+results in faster execution times and lower memory usage
+compared to interpreted languages such as Python or Perl. In
+addition, C allows for direct access to system resources such
+as memory, processor registers, and network interfaces, which
+is essential for developing an operating system.
+
+Another reason why C is used in the development of Linux is
+its portability. C is a platform-independent language, which
+means that code written in C can be compiled and run on
+different hardware architectures and operating systems. This
+is important for an operating system like Linux, which runs on
+a wide range of hardware platforms such as desktop computers,
+servers, and embedded devices.
+
+C is also a well-established language with a large community
+of developers and a wealth of libraries and tools available.
+This makes it easier to develop and maintain complex software
+systems such as an operating system. In addition, C code can
+be easily integrated with other languages such as assembly
+language or Python, which allows for greater flexibility in
+the development process.
+
+Despite its advantages, C is not without its challenges. C is
+a lower-level language, which means that it requires more
+attention to detail and careful programming practices to avoid
+errors such as buffer overflows or memory leaks. In addition,
+C code can be more difficult to read and understand compared
+to higher-level languages such as Python or Java.
+
+In conclusion, C is the primary language used in the
+development of Linux due to its efficiency, performance,
+portability, and rich ecosystem of tools and libraries. While
+it is not without its challenges, C remains a critical
+language for developing system software and operating systems
+like Linux.
+
+By Himanshu Shekhar
+Let's break it into components.
+
+Kernel : C and Assembly.
+OS scripts : Python and bash.
+Let's take the GUI apps one by one (the major ones).
+
+KDE : Based on Qt, primarily C++.
+GNOME / Unity : Based on GTK, C and some in Python. Now, they
+are using Vala(Elementary OS), which is like C#.
+Apps like google chrome : C++.
+There are many more examples possible. Most of them are in
+C/C++, Python. Rest are flavors or derivatives. It's the right
+tool for the right job. Some softwares are best suited as a
+shell script, while some as a binary. Depends.
+
+By John Cate
+Linux is coded in the C programming language, and has been
+since Linus Torvalds released the first version of the Linux
+kernel back in 1991.
+
+In fact, Torvalds is adamant that Linux not be coded in
+anything but standard C. When he released git, a version
+control system, in 2005, he was criticized by a Russian
+programmer on a newsgroup for coding in pure C rather than in
+C++, and famously went off on the man:
+
+  C++ is a horrible language. It's made more horrible by the
+  fact that a lot of substandard programmers use it, to the
+  point where it's much much easier to generate total and utter
+  crap with it. Quite frankly, even if the choice of C were to
+  do *nothing* but keep the C++ programmers out, that in itself
+  would be a huge reason to use C.
+  
+  In other words: the choice of C is the only sane choice. I
+  know Miles Bader jokingly said "to piss you off", but it's
+  actually true. I've come to the conclusion that any programmer
+  that would prefer the project to be in C++ over C is likely a
+  programmer that I really *would* prefer to piss off, so that
+  he doesn't come and screw up any project I'm involved with.
+  
+  C++ leads to really really bad design choices. You invariably
+  start using the "nice" library features of the language like
+  STL and Boost and other total and utter crap…
+  
+Ouch!
+
+He did say that he and the other Linux developers had tried
+using C++ in 1992, but that it hadn’t worked.
+
+In fact, in Linux we did try C++ once already, back in 1992.
+
+It sucks. Trust me - writing kernel code in C++ is a BLOODY
+STUPID IDEA.
+
+The fact is, C++ compilers are not trustworthy. They were even
+worse in 1992, but some fundamental facts haven't changed…
+
+Some of the other software used in Linux distros is written in
+other programming languages. But the Linux kernel itself, and
+anything else that Torvalds created or administers, is written
+entirely in ordinary C. 

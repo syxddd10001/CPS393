@@ -1,0 +1,18 @@
+#!/bin/bash
+#Source filedir
+#prints if each entry in current dir is file or dir
+
+ for  file  in *
+ do
+      if  [  -f  $file ]           # or if test -f $file
+      then
+           echo  "$file  is  file"
+      else
+           if  [  -d  $file  ]     # or if test -d $file
+           then
+                echo  "  $file  is  dir. "
+           fi
+      fi
+done
+exit 0
+

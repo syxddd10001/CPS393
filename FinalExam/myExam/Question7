@@ -1,0 +1,8 @@
+Answer file: ans7.c
+
+Given the answer file, fill in the XXXXX to answer the questions.
+DO NOT MODIFY ANYTHING ELSE IN THE CODE.
+
+main reads 2 strings from stdin into X and Y, then calls function
+
+Complete the function swap_string to swap strings X and Y WITHOUT moving their individual characters in memory. Assume X and Y have at at most 10 characters, and contain no whitespace characters.

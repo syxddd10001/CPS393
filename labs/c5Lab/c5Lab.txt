@@ -1,0 +1,38 @@
+CPS393 c5Lab
+
+Variadic Functions 
+
+-------------------------------------------------------------------------------
+EXAMPLES:
+
+In the following questions, unless the question states otherwise,
+assume correct input (number, format, etc. )
+
+PROGRAM NAMES FOR LAB:
+
+ c5Labq0x.c   where x is the question number
+
+-------------------------------------------------------------------------------
+
+
+1. Write your own simple version of the printf function named simple_printf which
+   expects a format string followed by arguments. The format string only
+   processes specifiers that are single characters as follows:
+   d  integer
+   c  character
+   f  double
+   The format string prints each specified item on a new line as follows.
+
+   e.g., simple_printf("fcdf", 2.99, 'x', 4, 36.2);  prints: 
+   2.990000
+   x
+   4
+   36.200000
+
+
+   Your simple_printf function IS allowed to use printf from stdio.h to print 
+   the individual integers, characters, doubles.
+   It's NOT required, but if you're interested, you could explore ways to print 
+   without having to use printf. Consider functions such as write, puts, putc, 
+   itoa (int to string), gcvt (float to string), etc.
+   

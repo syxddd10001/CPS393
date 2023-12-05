@@ -1,0 +1,35 @@
+Answer files: ans9[MNS].c
+
+
+Files ans9[MNS].c compile to make one program; no other files
+may be involved (e.g., no .h files):
+  ans9M.c contains the main function, as below
+  ans9N.c contains function MulN, as below
+  ans9S.c contains function AddS, as below
+
+Modify ans9[MNS].c so that variables x, s and n is SHARED by all 3
+files (global) as follows:
+    
+    ans9M.c - main File 
+    - ALLOCATES global variable x's storage and INITIALIZES it to 3.
+    - shares the variable s from file ans9S.c
+    - shares the variable n from file ans9N.c
+   
+    ans9S.c - modifies s by adding n and x  
+    - ALLOCATES global variable s's storage and INITIALIZES it to 0.
+    - shares the variable x from ans9M.c
+    - shares the variable n from ans9N.c
+   
+    ans9N.c -  modifies n by multiplying x and s   
+    - ALLOCATES global variable n's storage and INITIALIZES it to 1.
+    - shares the variable x from ans9M.c
+    - shares the variable s from ans9S.c 
+
+ONLY CHANGE THE XXXXX and nothing else
+
+Hint: use extern
+
+When x, n and s is thus shared, the program outputs:
+x=13
+n=12
+s=25

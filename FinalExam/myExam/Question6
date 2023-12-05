@@ -1,0 +1,28 @@
+Answer file ans6.c
+
+Given the answer file, fill in the XXXXX to answer the questions.
+DO NOT MODIFY ANYTHING ELSE IN THE CODE.
+
+Program counts the number of character c in each file f1, f2 ... fn and then prints the character count preceded by the file name.
+ 
+Character c is given as the first argument 
+And files f1 ... fn is given as arguments after the first argument 
+
+Complete the function countChar that takes 2 arguments, the file name and character to be counted.
+
+Sample Output:
+
+./a.out c que6.inE1 que6.inF1
+que6.inE1: 0 c characters
+que6.inF1: 5 c characters
+
+
+./a.out X que6.inE1 que6.inF1
+que6.inE1: 0 X characters
+que6.inF1: 9 X characters
+
+
+./a.out t que6.inE1 que6.inF1 que6.inF2
+que6.inE1: 0 t characters
+que6.inF1: 7 t characters
+que6.inF2: 2 t characters

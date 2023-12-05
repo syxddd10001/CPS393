@@ -1,0 +1,68 @@
+CPS393 u6Lab
+
+-------------------------------------------------------------------------------
+EXAMPLES:
+
+In the following questions, unless the question states otherwise,
+assume correct input (type and number of arguments, etc. )
+
+PROGRAM NAMES:
+
+-------------------------------------------------------------------------------
+
+1. Write an awk program named u6Labq01.awk that will count the number of blank 
+   lines in its given input file, and print the message: 
+   Input file F has B blank lines out of L total lines
+   where F is the input file name, B is the number of blank lines found,
+   and L is the total number of lines in F.
+   You can use awk's defined variables to get filename, etc.
+   Assume program is always run with a readable filename, as in
+   > awk -f u6Labq01.awk blanks4
+   Input file blanks4 has 4 blank lines out of 9 total lines
+   > awk -f u6Labq01.awk empty
+   Input file empty has 0 blank lines out of 0 total lines
+   >
+
+2. Write a shell program named u6Labq02.sh that uses awk to print each line
+   of input on a single line, separated by ', '.
+   > cat u6Labq02.infile
+   this is line 1
+   line 2 here
+   this is the    3rd line
+   4th line
+   > u6Labq02.sh
+   this is line 1, line 2 here, this is the    3rd line, 4th line
+   >
+   
+3. Write a shell program named u6Labq03.sh that uses awk to normalize
+   a program of temperature readings found in a tab-delimited csv file
+   such as testfiles/u6Labq03infile.csv
+   Program should output all temperatures in Celsius. Use the conversion
+   formula: C = (F-32)/1.8
+   It is OK if you use print (and your newly calculated Celsius values
+   print with 4 decimal places). e.g.,
+   > u6Labq03.sh u6Labq03infile.csv
+   temp    unit
+   26.1    C
+   25.6111 C
+   23.1    C
+   25.7    C
+   24.6111 C
+   25.1667 C
+   24.2    C
+   26.2778 C
+   27.9    C
+   23.9444 C
+   25.9    C
+   26.1111 C
+   > 
+   Note: An alternate solution is also given which uses printf so that
+   all temps are output with only one decimal place.
+   Note1: Another alternate solution is also given which uses an awk
+   if-statement instead of plain patterns. The homework for u6 outlined
+   if-statements.
+
+
+
+
+

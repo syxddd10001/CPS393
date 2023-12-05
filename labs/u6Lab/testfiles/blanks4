@@ -1,0 +1,9 @@
+
+GPT4 can write code, although not always correctly. There's a lot of poor
+code on the internet. Some of that poor code may have been part of
+GPT's training. For example, it has been shown to produce code
+
+vulnerable to SQL-injection attacks. This security testing was outlined
+in an article in Nature 618 (7964): 422–423.
+
+

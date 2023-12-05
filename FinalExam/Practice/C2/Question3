@@ -1,0 +1,22 @@
+
+Answer files: ans3[MDS].c
+
+Files ans3[MDS].c compile to make one program; no other files 
+may be involved (e.g., no .h files):
+  ans3M.c contains the main function, as below
+  ans3D.c contains function Double, as below
+  ans3S.c contains function Square, as below
+
+Obtain ans3[MDS].c by copying files que3[MDS].c respectively.
+Modify ans3[MDS].c so that a variable x is SHARED by all 3 
+files (global) as follows:
+   ans3M.c ALLOCATES global x's storage and INITIALIZES it to 1.
+   ans3D.c DOUBLES global x.
+   ans3S.c SQUARES global x.
+
+You may add lines of code to the 3 files, but you may NOT
+delete/modify the (existing) lines copied from que[MDS].c
+Hint: use extern
+
+When x is thus shared, the program outputs:
+x=10

@@ -1,0 +1,19 @@
+Answer file: ans2.c
+
+Given the code in ans2.c, fill in the XXXXXX to answer the question.
+DO NOT MODIFY ANYTHING ELSE IN THE CODE.
+
+main calls a variable-argument function, simple_printf.
+Function simple_printf's first argument specifies the number of arguments
+and the types of optional arguments, which must be double, string or char,
+indicated by f, s and c respectively. simple_printf prints each optional argument succeeded by " is type: "  " double", " string" or " char" appropriately.
+
+Test your program by doing: 
+    gcc ans2.c -o a2.out
+
+Expected Output:
+this is a STRING is type: string
+a is type char
+4.200000 is type double
+3.000000 is type double
+another string is type: string

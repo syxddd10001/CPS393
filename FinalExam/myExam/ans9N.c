@@ -1,4 +1,4 @@
-int n = 1;
+XXXXXXXX
 XXXXXXXX
 XXXXXXXX
 void MulN(void) { 

@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-int x = 3;
+XXXXXXXX
 XXXXXXXX
 XXXXXXXX
 

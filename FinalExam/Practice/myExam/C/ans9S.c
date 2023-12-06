@@ -1,4 +1,4 @@
-int s = 0;
+XXXXXXXX
 XXXXXXXX
 XXXXXXXX
 void AddS(void) {  

@@ -14,8 +14,8 @@ char* newString(char* str1, char* str2, char* str3, char* str4)
 }
 
 int main (void) {
-    char *S = newString("ABcd","efgHI");
-    printf("Called newString with ABcd and efgHI\n");
+    char *S = newString("ABcd","efgHI","jKLMno","PqRstu") ;
+    printf("Called newString with ABcd efgHI jKLMno PqRstu\n");
     printf("It returned: %s\n", S);
     printf("with length: %ld\n", strlen(S));
     return 0;

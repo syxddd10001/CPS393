@@ -1,0 +1,34 @@
+
+Answer file: ans15.sh
+
+Program expects one command line argument, an integer from
+1 to 12 inclusive, and prints the number of days in that month,
+as follows: MMM has DD days
+where MMM is the 3-letter abbreviated month name, and DD is the
+number of days in that month. 
+
+e.g.,
+> ./ans15.sh 2
+Feb has 28 days
+> 
+> ./ans15.sh 11
+Nov has 30 days
+> 
+
+Program must define and appropriately use 2 functions: 
+
+The first function takes one argument:
+ It prints the 3-letter abbreviated month name for month number $1
+ It must define and appropriately use this array containing the 
+ 3-letter abbreviated names:
+ Month=(Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec)
+
+The second function takes one argument:
+ It prints the number of days in month $1. 
+ It must define and appropriately use this array containing the 
+ number of days for each month:
+ NumDays=(31 28 31 30 31 30 31 31 30 31 30 31)
+
+In the example output above, "Feb" and "Nov" were printed by
+the first function, and "28" and "30" by the second function.
+

@@ -1,0 +1,17 @@
+
+Answer file: ans12.sh
+
+Program expects 1 or 2 command line arguments (CLAs).
+  if 1 CLA,  print file $1 as one long line.
+  if 2 CLAs, print file $1 with $2 words per line.
+
+e.g.:
+> ./ans12.sh que12.in 6
+This is a file that has
+a number of words and lines
+in it.
+> ./ans12.sh que12.in
+This is a file that has a number of words and lines in it.
+> 
+
+Hint: xargs -n 

@@ -1,0 +1,10 @@
+
+Answer file: ans10.sh
+
+Program uses awk to print the number of words on stdin.
+Example of output: 
+> (echo ab d ghi ; echo 1 2 3 4 5 ; echo yyyy zz) | ans10.sh
+10 words
+>
+Hint: awk variable NF gives the number of fields in current record
+

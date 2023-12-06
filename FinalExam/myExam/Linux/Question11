@@ -1,0 +1,12 @@
+
+Answer file: ans11.sh
+
+Program uses a sequence expression {$1..$2} to produce a sequence
+of integers from $1 to $2 and then pipes that sequence to the command $3
+e.g.,
+> ./ans11.sh 8 12 'tr 1 x'
+8 9 x0 xx x2
+> ./ans11.sh A E rev
+E D C B A
+> 
+

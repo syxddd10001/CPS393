@@ -9,10 +9,10 @@ typedef struct {
 
 void set(complex **a, int real, int imag) {
   priv_complex *new;
-  new = (priv_complex*)malloc(sizeof(priv_complex));
-  new->i=real;
-  new->j=imag;
-  (*a)=(complex*) new;
+  new = XXXXXXX;
+  XXXXXXX
+  XXXXXXX
+  (*a)=XXXXXXXnew;
 }
 void print(complex *a) {
   printf("%d+%di\n", (*(priv_complex *)a).i, (*(priv_complex *)a).j);

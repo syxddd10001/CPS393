@@ -1,0 +1,13 @@
+Answer file: ans5.c
+
+Given the answer file, fill in the XXXXX to answer the questions.
+DO NOT MODIFY ANYTHING ELSE IN THE CODE.
+
+Program prints the product of its first and last command line arguments,
+to one decimal place.
+
+Assume good command line arguments (at least 2, all int or decimal).
+e.g. this does 1.1 * 3.3 = 3.63:
+> a.out 1.1 2 3.2 3.3
+3.6
+>

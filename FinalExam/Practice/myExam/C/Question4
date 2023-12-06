@@ -1,0 +1,15 @@
+Answer file: ans4.c
+
+Given the answer file, fill in the XXXXX to answer the questions.
+DO NOT MODIFY ANYTHING ELSE IN THE CODE.
+
+newString returns a new string that contains a copy of str1 followed by a copy of str2, str3, and str4.
+
+Function newString MUST use malloc or calloc to allocate EXACTLY
+the correct amount of storage to hold the new string, which is:
+length of (str1 + str2 + str3 + str4) + 1 (+1 for /0)
+
+Expected output:
+Called newString with ABcd efgHI jKLMno PqRstu
+It returned: ABcdefgHIjKLMnoPqRstu
+with length: 21
